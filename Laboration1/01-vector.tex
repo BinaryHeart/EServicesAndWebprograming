@@ -62,22 +62,24 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. 
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. Det finns redan en databas skapad för varje användare som heter XXX med användarnamn YYY och lösen ZZZ 
 
 \section{Inlämning}
-Denna laboration består av 4 faser där du ska lämna in varje fas i en egen mapp. Din inlämning ska alltså bestå av en .zip-fil eller .rar-fil (inga andra komprimeringsformat är tillåtna!) innehållandes följande (med följande struktur):
+Denna laboration består av 4 faser men kommer endast resultera till en inlämning. Din inlämning ska alltså bestå av en .zip-fil eller .rar-fil (inga andra komprimeringsformat är tillåtna!) innehållandes följande (med följande struktur):
   \begin{itemize}
     \item labb1\_fornamn\_efternamn.zip
       \begin{itemize}
         \item Laboration1 (mapp)
           \begin{itemize}
-            \item .js (din svg-fil)
-            \item . (den bild du utgick ifrån)
+            \item index.php 
+            \item images (mapp med bilder)
+            \item js (mapp med javscriptfiler)
+	   \item css (mapp med stylesheets)
           \end{itemize}
-
     \end{itemize}
-
   \end{itemize}
+
+Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
 
 
 \pagebreak
@@ -88,60 +90,24 @@ Nedan följer uppgifterna som resulterar i inlämningen ovan.
   Denna övning går ut på att skapa ett formulär för ett blogginlägg. 
 
   \begin{enumerate}
-    \item Börja med att välja ett mönster på sidan \href{http://chrokh.github.io/svg-and-canvas-exercises}{http://chrokh.github.io/svg-and-canvas-exercises}. \textbf{Välj inte samma mönster som någon bredvid dig.} Spara ned en kopia av mönstret så att du inte tappar bort den och kan ha den som referens.
-    \item Alla mönster är 400x400 pixlar, så tänk på det när du börjar med nästa steg.
-    \item Försök nu återskapa mönstret genom att använda SVG. Du kan arbeta på det sätt som du finner enklast. Men vår rekommendation är att du använder ett online-verktyg såsom t.ex. \href{http://www.w3schools.com/html/tryit.asp?filename=tryhtml5_svg_ex}{tryit ifrån W3Scools} eller \href{http://jsfiddle.net/}{jsfiddle}.
-    \item När du lyckats återskapa mönstret så behöver du spara ditt svg-element i ett separat dokument (som du namnger enligt inlämningsinstruktionerna). Du ska alltså \textbf{endast spara och lämna in ditt svg-element} och inte hela html-dokumentet.
-
-    Exempel på korrekt inlämning (\texttt{filnamn.svg}):
-    \begin{lstlisting}
-<svg width="400" height="400">
-  <rect x="100" y="100" width="200" height="200" fill="rgb(255,0,0)"/>
-</svg>
-    \end{lstlisting}
-  \end{enumerate}
-
-
-
+    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är namn på den som postat inlägger, själva inlägget och emailadress. Sedan skall det finnas en knapp för att kunna posta inläggen.
+   \end{enumerate}
 
   \exercise{Smyckning}
   Denna övning går ut på att skapa en smyckning av sidan. Ni skall använda er av en extern CSS. 
 
     \begin{enumerate}
-      \item Välj ett nytt mönster.
-      \item Skapa ett nytt Illustrator-dokument som är 400x400 pixlar stort.
-      \item Återskapa det andra mönstret genom att använda verktygen i Illustrator.
-      \item Ge varje ``färgfält'' i din fil en toning. Med andra ord: Om du har ett rött färgfält, gör istället så att det går ifrån mörkrött till ljusrött.
+      \item styla din sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för och oseriösa stylningar godtas ej. 
     \end{enumerate}
-
-
-
-
-
 
   \exercise{Validering}
   Denna övning går ut på att validera input. Ni skall se till att det finns en giltig adress och att inga fält är tomma. Detta skall göras på klienten, alltså med javascript.
 
-  \paragraph{Bilden måste innehålla:}
+  \paragraph{Krav på validering}
     \begin{itemize}
-      \item Ett djur
-      \item Ett ting
-      \item En bakgrund
+      \item man skall validera att inga fält är tomma.
+      \item man skall validera att det är en giltig e-post adress, alltså att den innhåller ett @ och en punkt. 
     \end{itemize}
-
-  \paragraph{Du måste använda följande tekniker (mist en av varje)}
-    \begin{itemize}
-      \item Geometriska figurer (ex. cirkel, rektangel, stjärna etc.)
-      \item Fria Beizér-kurvor (genom ex. ritstiftet/pen tool)
-      \item Gradient / ``fade''
-    \end{itemize}
-
-  \paragraph{Din .ai-fil måste:}
-  \begin{itemize}
-      \item Vara välstrukturerad medelst grupper (groups)
-      \item Vara välstrukturerad medelst lager (layers)
-    \end{itemize}
-
 
 
  \exercise{Hämta och spara data}
