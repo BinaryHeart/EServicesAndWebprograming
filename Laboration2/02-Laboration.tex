@@ -62,7 +62,9 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Denna laboration kommer att resultera till att skapa en sida som man är tvungen att logga in till. Ni kommer att bekanta er med både HTTPs get och post. Hasning och saltning. egen saltning och PHPs hash (PHP bcrypt) till Gästboken.
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Denna laboration kommer att resultera till att skapa en sida som man är tvungen att logga in till. Ni kommer att bekanta er med både HTTPs get och post, Hasning och saltning. egen saltning och PHPs hash (PHP bcrypt) till Gästboken. Ni skall alltså skapa en inloggning till er gästbok som gjordes i förra laborationen. 
+
+
 
 \section{Föreslagen struktur}
 Denna laboration består av 4 faser men kommer endast resultera till ett program. Denna laboration kräver ingen inlämning men för att få en inblick om vad som krävs ges ett förslag på hur ni kan strukturera era dokument.
@@ -72,6 +74,8 @@ Denna laboration består av 4 faser men kommer endast resultera till ett program
         \item Laboration1 (mapp)
           \begin{itemize}
             \item index.php 
+            \item login.php
+	   \item registration.php
             \item images (mapp med bilder)
             \item js (mapp med javscriptfiler)
 	   \item css (mapp med stylesheets)
@@ -86,38 +90,39 @@ Observera att hur många filer ni har i varje mapp beror på vad ni använder er
 \section{Uppgifter}
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
-  \exercise{Formulär}
-  Denna övning går ut på att skapa ett formulär för ett blogginlägg. 
+
+  \exercise{Designa databasen}
+Ni behöver som har hand om användarna som finns registrerade till denna fantastiska gästbok. Denna tabell behöver ha hand om minst användarnamn, lösenord men även att kunna ha en kolumn för salt. 
+
+ \exercise{Skapa en registreringssida}
+
+Skapa en sida som har ett formulär som kan skapa användare. 
 
   \begin{enumerate}
-    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är namn på den som postat inlägger, själva inlägget och emailadress. Sedan skall det finnas en knapp för att kunna posta inläggen.
+    \item Börja med att skapa registraion.php 
+    \item Skapa ett formulär där användaren kan skriva in sina uppgifter
+    \item Skapa en function som randomiserar en sträng som skall användas som salt till lösenordet.
+    \item Kryptera salt+ det lösenord som användaren valt.
+    \item Lägg in allt i databasen och ge användaren information om registreringen lyckades eller inte. 
    \end{enumerate}
 
-  \exercise{Smyckning}
-  Denna övning går ut på att skapa en smyckning av sidan. Ni skall använda er av en extern CSS. Försök att verkligen lägga tid på att få sidan att se ut så som ni vill. Fundera även på om hur ni skulle kunna få sidan responsive.
+ \exercise{Skapa inloggningssida} 
+ Skapa en inloggningssida för er applikation. 
 
-    \begin{enumerate}
-      \item styla din sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för och oseriösa stylningar godtas ej. 
-    \end{enumerate}
+ \begin{enumerate}
+    \item Börja med att skapa login.php
+    \item Skapa ett formulär där användaren kan skriva in sina inloggningsuppgifter
+    \item Hämta saltet från databasen
+    \item Kryptera salt+ lösenord och matcha mot det lösenord som finns i databasen. 
+    \item Sätt en session.
+   \end{enumerate}
 
-  \exercise{Validering}
-  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig adress och att inga fält är tomma. Detta skall göras på klienten, alltså med javascript.
+ \exercise{Uppdatera indexsidan} 
+I denna section skall ni nu se till att följande kan ske. Ni skall endast tillåta att användare som är inloggade skall kunna se sidan. Om man skulle skriva in sidan utan att vara inloggad skall man antingen få information om att de måste logga in eller transporteras till inloggningssidan på en gång. 
 
-  \paragraph{Krav på validering}
-    \begin{itemize}
-      \item man skall validera att inga fält är tomma.
-      \item man skall validera att det är en giltig e-post adress, alltså att den innhåller ett @ och en punkt. 
-    \end{itemize}
+Sedan skall ni skapa en knapp eller länk där användaren kan logga ut.  
 
-
- \exercise{Hämta och spara data}
-  Denna övning går ut på att spara inlägg i en databas. Ni skall även skriva ut alla inlägg som finns i databasen. Ni är fria till att välja om ni postar inläggen på samma sida som formuläret eller om man går till en sida med enbart inläggen.
- \begin{itemize}
-      \item börja med att försöka lägga in ett inlägg, kolla i databasen att den verkligen kommer in.
-      \item I detta steg är det dags att skriva ut inläggen.
-     \item Styla inläggen så att den passar den övriga layouten.
-    \end{itemize}
-
-
+ \exercise{Smycka sidan} 
+Se nu till att sidan håller ett enhetligt intryck i sin design. Med det menas att det skall synas att sidan håller samma stilmall.
 
 \end{document}
