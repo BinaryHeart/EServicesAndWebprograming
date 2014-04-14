@@ -62,9 +62,8 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Require PHP / Utöka gästboken med respons på inlägg (Databasdesign 
+I denna laboration kommer vi att utöka gästboken med att man skall kunna ge feedback på gästboken. Det betyder att varje inlägg bör ha en länk eller liknande för att besvara ett inlägg. Detta kommer innebära att det kommer kräva en algoritm för att kunna generera och sortera att inläggen kommer i rätt ordning. Designen för att hur er dagbok ser ut kommer ni själv få välje men kräver ändå lite av gräsnssnittet för att det skall se bra ut. http://designm.ag/designer-showcase/well-designed-threaded-comments-sections-in-webpages/
 
-Utökade förslag: http://stackoverflow.com/questions/8523231/what-is-meant-by-javascript-namespacing
 
 
 \section{Föreslagen struktur}
@@ -82,44 +81,23 @@ Denna laboration består av 4 faser men kommer endast resultera till ett program
     \end{itemize}
   \end{itemize}
 
-Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
+
 
 
 \pagebreak
-\section{Uppgifter}
+\section{ }
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
-  \exercise{Formulär}
-  Denna övning går ut på att skapa ett formulär för ett blogginlägg. 
-
-  \begin{enumerate}
-    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är namn på den som postat inlägger, själva inlägget och emailadress. Sedan skall det finnas en knapp för att kunna posta inläggen.
-   \end{enumerate}
-
-  \exercise{Smyckning}
-  Denna övning går ut på att skapa en smyckning av sidan. Ni skall använda er av en extern CSS. Försök att verkligen lägga tid på att få sidan att se ut så som ni vill. Fundera även på om hur ni skulle kunna få sidan responsive.
-
-    \begin{enumerate}
-      \item styla din sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för och oseriösa stylningar godtas ej. 
-    \end{enumerate}
-
-  \exercise{Validering}
-  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig adress och att inga fält är tomma. Detta skall göras på klienten, alltså med javascript.
-
-  \paragraph{Krav på validering}
-    \begin{itemize}
-      \item man skall validera att inga fält är tomma.
-      \item man skall validera att det är en giltig e-post adress, alltså att den innhåller ett @ och en punkt. 
-    \end{itemize}
+  \exercise{Designa databasen}
+ Ni bör nu i varje inlägg kunna lägga till vem inlägget tillhör, enklast är att ha en förälder till noden. 
 
 
  \exercise{Hämta och spara data}
-  Denna övning går ut på att spara inlägg i en databas. Ni skall även skriva ut alla inlägg som finns i databasen. Ni är fria till att välja om ni postar inläggen på samma sida som formuläret eller om man går till en sida med enbart inläggen.
- \begin{itemize}
-      \item börja med att försöka lägga in ett inlägg, kolla i databasen att den verkligen kommer in.
-      \item I detta steg är det dags att skriva ut inläggen.
-     \item Styla inläggen så att den passar den övriga layouten.
-    \end{itemize}
+  Skapa nu en funktion för att kunna besvara inlägget, antingen skapar ni en ny sida eller att man skickas till det formulär ni redan har och sedan lägger in det i databasen. 
+
+ \exercise{Smyckning}
+Nu är det dags att smycka er sida så att man kan tydligt se vilken som tillhör vem. 
+
 
 
 

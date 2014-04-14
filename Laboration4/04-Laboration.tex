@@ -51,7 +51,7 @@
   breakatwhitespace,
 }
 
-\title{ Labb 1 }
+\title{ Labb 4 }
 
 \author{ E-tjänster och webbprogrammering 7.5 hp VT-14 }
 \begin{document}
@@ -62,7 +62,7 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. AJAX - Exakt alla requester skall ske med AJAX -> JSON 
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. AJAX - Exakt alla requester skall ske med AJAX.
 
 \section{Föreslagen struktur}
 Denna laboration består av 4 faser men kommer endast resultera till ett program. Denna laboration kräver ingen inlämning men för att få en inblick om vad som krävs ges ett förslag på hur ni kan strukturera era dokument.
@@ -82,41 +82,27 @@ Denna laboration består av 4 faser men kommer endast resultera till ett program
 Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
 
 
+
+
 \pagebreak
 \section{Uppgifter}
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
-  \exercise{Formulär}
-  Denna övning går ut på att skapa ett formulär för ett blogginlägg. 
+  \exercise{Refaktorisering}
+Innan ni börjar att byta ut alla requesters som tvingar att ladda om sidan är det bra att gå igenom sin kod för att förfina sin lösning.
 
-  \begin{enumerate}
-    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är namn på den som postat inlägger, själva inlägget och emailadress. Sedan skall det finnas en knapp för att kunna posta inläggen.
-   \end{enumerate}
-
-  \exercise{Smyckning}
-  Denna övning går ut på att skapa en smyckning av sidan. Ni skall använda er av en extern CSS. Försök att verkligen lägga tid på att få sidan att se ut så som ni vill. Fundera även på om hur ni skulle kunna få sidan responsive.
-
-    \begin{enumerate}
-      \item styla din sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för och oseriösa stylningar godtas ej. 
-    \end{enumerate}
-
-  \exercise{Validering}
-  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig adress och att inga fält är tomma. Detta skall göras på klienten, alltså med javascript.
-
-  \paragraph{Krav på validering}
-    \begin{itemize}
-      \item man skall validera att inga fält är tomma.
-      \item man skall validera att det är en giltig e-post adress, alltså att den innhåller ett @ och en punkt. 
-    \end{itemize}
-
-
- \exercise{Hämta och spara data}
-  Denna övning går ut på att spara inlägg i en databas. Ni skall även skriva ut alla inlägg som finns i databasen. Ni är fria till att välja om ni postar inläggen på samma sida som formuläret eller om man går till en sida med enbart inläggen.
  \begin{itemize}
-      \item börja med att försöka lägga in ett inlägg, kolla i databasen att den verkligen kommer in.
-      \item I detta steg är det dags att skriva ut inläggen.
-     \item Styla inläggen så att den passar den övriga layouten.
-    \end{itemize}
+            \item Duplicerad kod inom ett dokument.
+            \item Duplicerad kod mellan filer.
+            \item Variabel- och metodnamn.
+  \end{itemize}
+
+  \exercise{AJAX}
+Antagligen så har du vid varje funktion anrop till servern användt dig av tekniken att ladda om hela sidan när något förändrar sig. Eftersom ett anrop till servern tar tid så är det en god ide att inte behöva ladda om sidan mer än nödvändigt och särskilt inte om det endast är delar av innehållet på sidan som skall uppdateras. För detta används istället AJAX. 
+
+Er uppgift är att vid varje anrop endast använda er av AJAX och utifall ni dirigeras till en annan sida vid exempelvis att skriva ett inlägg och visa inlägg skall nu detta ske på samma sida, utan att ladda om sidan. 
+
+
 
 
 
