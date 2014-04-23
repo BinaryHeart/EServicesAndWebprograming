@@ -62,24 +62,25 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg.
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. Föreställ dig en blogg där man kan posta inlägg utan att logga in.
 
 \section{Föreslagen struktur}
-Denna laboration består av 4 faser men kommer endast resultera till ett program. Denna laboration kräver ingen inlämning men för att få en inblick om vad som krävs ges ett förslag på hur ni kan strukturera era dokument.
+Denna laboration består av 4 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
   \begin{itemize}
-    \item labb1\_fornamn\_efternamn.zip
+    \item labb1-fornamn-efternamn (mapp)
+    \begin{itemize}
+      \item \texttt{index.php} 
+      \item \texttt{assets} (mapp)
       \begin{itemize}
-        \item Laboration1 (mapp)
-          \begin{itemize}
-            \item index.php 
-            \item images (mapp med bilder)
-            \item js (mapp med javscriptfiler)
-	   \item css (mapp med stylesheets)
-          \end{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js  } (mapp med javscriptfiler)
+        \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
     \end{itemize}
   \end{itemize}
 
-Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
+\paragraph{}
+Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Läs vidare i instruktionerna för klarare förståelse.
 
 
 \pagebreak
@@ -87,38 +88,61 @@ Observera att hur många filer ni har i varje mapp beror på vad ni använder er
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
   \exercise{Formulär}
-  Denna övning går ut på att skapa ett formulär för ett blogginlägg. 
+  Ett bra ställe att börja på kan vara att försöka få ett formulär att visas på en webbsida. Om du inte vill behöver du alltså inte involvera \texttt{php} än. Istället kan du arbeta med \texttt{html}.
+
+  Men poängen är alltså att -- för att användaren ska kunna posta ett blogginlägg krävs ett formulär. Vi bryr oss i denna övning inte om att försöka få formuläret att ``fungera''. Börja helt enkelt med att försöka få ett \texttt{html}-formulär med relevanta fält att visas på en \texttt{html}-sida.
 
   \begin{enumerate}
-    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är namn på den som postat inlägger, själva inlägget och emailadress. Sedan skall det finnas en knapp för att kunna posta inläggen.
+    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är \texttt{namn} på den som postat inlägget, \texttt{själva inlägget} och \texttt{emailadress}. Sedan skall det förstås finnas en knapp för att kunna posta inläggen.
    \end{enumerate}
 
   \exercise{Smyckning}
-  Denna övning går ut på att skapa en smyckning av sidan. Ni skall använda er av en extern CSS. Försök att verkligen lägga tid på att få sidan att se ut så som ni vill. Fundera även på om hur ni skulle kunna få sidan responsive.
+  I denna övning fokuserar vi på att sidans utseende. Alltså i huvudsak \texttt{css}. Skapa dig en mental bild (eller rita på ett papper) av hur du/ni skulle vilja att sidan ser ut. Försök sedan att realisera visionen så att sidan faktiskt ser ut som ``mockup:en''.
 
-    \begin{enumerate}
-      \item styla din sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för och oseriösa stylningar godtas ej. 
-    \end{enumerate}
+  \paragraph{}
+  Tänk på att ni under denna kurs kommer behöva kunna producera en webbapplikation med professionellt utseende. Så det finns \textbf{ingen anledning} att göra det för enkelt för sig.
+
+  \begin{itemize}
+    \item Styla er sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för. Det ska vara klart och tydligt hur man ska göra för att faktiskt posta ett inlägg.
+    \item Placera er \texttt{css} i en extern fil. Skriv alltså ingen \texttt{inline css}.
+    \item Fundera över huruvida er sida är \texttt{responsiv} (som i \texttt{responsive design}). Hur skulle den kunna göras responsiv?
+  \end{itemize}
+
+  \paragraph{}
+  Oseriös stilning kommer inte att godtas.
+
+
 
   \exercise{Validering}
-  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig adress och att inga fält är tomma. Detta skall göras på klienten, alltså med javascript.
+  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig e-postadress, att inga fält är tomma. Detta skall göras på klienten, alltså med \texttt{javascript}.
 
   \paragraph{Krav på validering}
     \begin{itemize}
-      \item man skall validera att inga fält är tomma.
-      \item man skall validera att det är en giltig e-post adress, alltså att den innhåller ett @ och en punkt. 
+      \item Inga fält får vara tomma. Även strängen \texttt{"    "} räknas som tom, trots att den innehåller en massa mellanslag.
+      \item E-postadressen måste vara en giltig e-post adress. Det räcker med att validera att den innhåller ett \texttt{@}-tecken, samt minst en punkt efter.
     \end{itemize}
- \exercise{Deigna databasen}
 
-Skapa tabell som har hand om alla gästbooksinlägg och denna bör ha ett ID som skapas automatiskt av databasen, se auto increment. Den bör även ha en kolumn för en referens till ett annat inlägg. Detta är för att sedan i senare på laboration 3 skapa funktioner att man kan besvara andras inlägg. 
 
- \exercise{Hämta och spara data}
-  Denna övning går ut på att spara inlägg i en databas. Ni skall även skriva ut alla inlägg som finns i databasen. Ni är fria till att välja om ni postar inläggen på samma sida som formuläret eller om man går till en sida med enbart inläggen.
+
+  \exercise{Deigna databasen}
+  I denna övning börjar vi närma oss en fungerande produkt. Vi börjar med att designa en databas.
+
+  \begin{itemize}
+    \item Skapa tabell som har hand om alla gästbooksinlägg.
+    \item Tabellen måste ha en \texttt{PK} som genereras av databasen per inlägg. Se \texttt{auto increment}.
+    \item Tabellen måste ha minst ett fält per övrigt fält i formuläret.
+    \item Den bör även ha en kolumn för en referens till ett annat inlägg. Detta är för att sedan i senare på laboration 3 skapa funktioner att man kan besvara andras inlägg. % TODO: Remove to avoid confusion
+  \end{itemize}
+
+
+
+ \exercise{Spara och visa data}
+  Denna övning går ut på att faktiskt spara inläggen i en databas. Samt att visa dem. Ni väljer själva huruvida ni vill låta användaren posta inlägg på samma sida som inläggen visas på. Eller om inläggen ska visas på en sida, och formuläret på en annan.
  \begin{itemize}
-      \item börja med att försöka lägga in ett inlägg, kolla i databasen att den verkligen kommer in.
-      \item Försök nu att skriva ut från databasen, ni väljer själva i vilken ordning. 
-     \item Styla inläggen så att den passar den övriga layouten.
-    \end{itemize}
+    \item Börja med att försöka lägga in ett inlägg. Verifera att inlägget faktiskt ``kommer in'' genom att kolla i databasen.
+    \item När ni väl har inlägg i databasen. Försök nu istället att skriva ut innehållet ifrån databasen på den sidan som ska visa inläggen. Ni väljer själva i vilken ordning inläggen ska visas. 
+    \item Style:a inläggen så att de passar den övriga layouten.
+  \end{itemize}
 
 
 
