@@ -62,12 +62,14 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Denna laboration kommer att resultera till att skapa en sida som man är tvungen att logga in till. Ni kommer att bekanta er med både HTTPs get och post, Hasning och saltning. egen saltning och PHPs hash (PHP bcrypt) till Gästboken. Ni skall alltså skapa en inloggning till er gästbok som gjordes i förra laborationen. 
+I denna laboration kommer vi att arbeta med \texttt{HTML}, \texttt{CSS}, \texttt{PHP}, \texttt{Javascript} och \texttt{MySQL}. Målet med denna laboration är att bygga en applikation med inloggningsfunktionalitet. Samt användarregistrering. Med fördel utgår du ifrån den applikation du byggde i labb 1 (kom ihåg att säkerhetskopiera), men vill du börja ifrån ``scratch'' går det förstås lika bra.
+
+För att lösa denna labb behöver vi oundvikligen bekanta oss med \texttt{HTTP POST} och \texttt{HTTP GET}. Såväl som koncepten \texttt{hash}:ning och \texttt{salt}:ning. egen saltning och PHPs hash (PHP bcrypt) till Gästboken.
 
 
 
 \section{Föreslagen struktur}
-Denna laboration består av 4 faser men kommer endast resultera till ett program. Denna laboration kräver ingen inlämning men för att få en inblick om vad som krävs ges ett förslag på hur ni kan strukturera era dokument.
+Denna laboration består av 6 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
   \begin{itemize}
     \item labb2-fornamn-efternamn (mapp)
       \begin{itemize}
@@ -83,7 +85,7 @@ Denna laboration består av 4 faser men kommer endast resultera till ett program
     \end{itemize}
   \end{itemize}
 
-Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
+Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Läs vidare i instruktionerna för klarare förståelse.
 
 
 \pagebreak
@@ -91,45 +93,64 @@ Observera att hur många filer ni har i varje mapp beror på vad ni använder er
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
 
-  \exercise{Designa databasen}
-Ni behöver som har hand om användarna som finns registrerade till denna fantastiska gästbok. Denna tabell behöver ha hand om minst användarnamn, lösenord men även att kunna ha en kolumn för salt. 
+\exercise{Designa databasen}
+Låt oss börja med att designa databasen. Målet är att (minst) lagra följande information om en användare: e-post, password och salt. Läs på om du inte vet vad salt är.
+\begin{enumerate}
+  \item Skapa en användartabell i databasen (enl. ovan spec.).
+  \item Tabellen måste ha en primärnyckel (\texttt{PK}) som automatiskt inkrementeras.
+\end{enumerate}
 
- \exercise{Skapa en registreringssida}
 
-Skapa en sida som har ett formulär som kan skapa användare. 
+
+
+\exercise{Skapa en registreringssidan}
+Målet med detta steg är att skapa en sida som innehåller ett formulär. Detta formulär ska innehålla alla fält som användaren behöver för att kunna registrera sig. Alltså skapa en användare.
 
   \begin{enumerate}
-    \item Börja med att skapa registraion.php 
-    \item Skapa ett formulär där användaren kan skriva in sina uppgifter
-    \item Skapa en function som randomiserar en sträng som skall användas som salt till lösenordet.
-    \item Kryptera salt+ det lösenord som användaren valt.
-    \item Lägg in allt i databasen och ge användaren information om registreringen lyckades eller inte. 
+    \item Börja med att skapa \texttt{registration.php}
+    \item Fyll sidan med ett \texttt{HTML}-formulär innehållandes de komponenter användaren behöver för att fylla i relevant data.
+    \item Skriv en \texttt{PHP}-funktion som du kan använda för att randomisera fram den sträng som ska användas som salt till lösenordet.
+    \item När användaren sedan klickar på registreringsknappen, se till att skicka datat till en sida som sparar informationen i databasen.
+    \item Kom ihåg att lösenordet ska krypteras tillsammans med saltet.
+    \item Användaren måste på något sätt meddelas om huruvida registreringen lyckades eller inte.
+  \end{enumerate}
+
+
+
+  \exercise{Skapa inloggningssidan} 
+  Nu ska vi skapa en inloggningssida för samma applikation. 
+
+  \begin{enumerate}
+    \item Börja med att skapa filen \texttt{login.php}.
+    \item Fyll sidan med ett \texttt{HTML}-formulär och de komponenter användaren behöver för att fylla i relevant data.
+    \item Hämta saltet från databasen.
+    \item Kryptera salt + lösenord och matcha mot det lösenord som finns i databasen. 
+    \item Skapa en \texttt{session} för användaren.
    \end{enumerate}
 
- \exercise{Skapa inloggningssida} 
- Skapa en inloggningssida för er applikation. 
 
- \begin{enumerate}
-    \item Börja med att skapa login.php
-    \item Skapa ett formulär där användaren kan skriva in sina inloggningsuppgifter
-    \item Hämta saltet från databasen
-    \item Kryptera salt+ lösenord och matcha mot det lösenord som finns i databasen. 
-    \item Sätt en session.
-   \end{enumerate}
 
- \exercise{Uppdatera indexsidan} 
-I denna section skall ni nu se till att följande kan ske. Ni skall endast tillåta att användare som är inloggade skall kunna se sidan. Om man skulle skriva in sidan utan att vara inloggad skall man antingen få information om att de måste logga in eller transporteras till inloggningssidan på en gång. 
+  \exercise{Uppdatera indexsidan} 
+  Nu skall vi se till inloggningen faktiskt spelar någon roll. Målet är att ``skydda'' index-sidan. Alltså sidan där man kan posta blogginlägg som ni skapade i laboration 1.
 
-Sedan skall ni skapa en knapp eller länk där användaren kan logga ut.  
+  Endast användare som är inloggade skall kunna se sidan. Om man skulle skriva in adressen till sidan i webbläsarens adressfält, utan att vara inloggad, skall användaren antingen (A) motta ett meddelande om att de måste logga in, eller (B) förflyttas (\texttt{redirect}) till inloggningssidan automatiskt. 
 
- \exercise{Smycka sidan} 
-Se nu till att sidan håller ett enhetligt intryck i sin design. Med det menas att det skall synas att sidan håller samma stilmall.
+  Ni behöver även skapa en knapp eller länk där användaren kan logga ut. Alltså ``radera'' användarens \texttt{session}.
 
- \exercise{Förslag på uttökningar} 
-\begin{itemize}
-            \item Se till att man inte får skapa användare med samma användarnamn.
-	   \item  Kontrollera att användaren anger starka lösenord. 
-          \end{itemize}
+
+
+
+  \exercise{Smycka sidan} 
+  Se nu till att sidan håller ett enhetligt intryck i sin design. Oseriösa förslag godtas ej.
+
+
+
+
+  \exercise{Förslag på viktiga uttökningar} 
+  \begin{itemize}
+    \item Se till att det inte går att skapa användare med samma e-post som någon annan.
+    \item Kontrollera att användaren anger ett ``starkt'' lösenord. 
+  \end{itemize}
 
 
 \end{document}
