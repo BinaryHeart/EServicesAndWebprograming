@@ -62,25 +62,34 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. AJAX - Exakt alla requester skall ske med AJAX.
+I denna laboration kommer vi att arbeta i två pass. I det första kommer vi att refaktorera vår applikation (alltså resultatet av tidigare labbar). För att öka nivån av ``kontroll'', struktur och läsbarhet. Vi kommer att refaktorera vår \texttt{HTML}, \texttt{CSS}, \texttt{PHP}, \texttt{JavaScript} såväl som vår \texttt{SQL}. Med andra ord all kod vi skrivit :)
+
+I det andra passet av denna laboration kommer vi att arbeta med att bygga om vår sida till en \href{http://en.wikipedia.org/wiki/Single-page_application}{Single Page Application}. Vi kommer alltså använda det tillvägagångssätt som ofta benämns \texttt{AJAX} för att se till att användaren kan interagera med sidan som vanligt, men utan att någon sida någonsin fullständigt ``laddas om''.
 
 \section{Föreslagen struktur}
-Denna laboration består av 4 faser men kommer endast resultera till ett program. Denna laboration kräver ingen inlämning men för att få en inblick om vad som krävs ges ett förslag på hur ni kan strukturera era dokument.
+Denna laboration består av 2 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+\begin{itemize}
+  \item \texttt{labb4-fornamn-efternamn} (mapp)
   \begin{itemize}
-    \item labb1\_fornamn\_efternamn.zip
+    \item \texttt{index.php}
+    \item \texttt{include} (mapp)
       \begin{itemize}
-        \item Laboration1 (mapp)
-          \begin{itemize}
-            \item index.php 
-            \item images (mapp med bilder)
-            \item js (mapp med javscriptfiler)
-	   \item css (mapp med stylesheets)
-          \end{itemize}
+        \item \texttt{db-connect.php}
+        \item \texttt{db-queries.php}
+        \item \texttt{process-register.php}
+        \item \texttt{process-login.php}
+        \item \texttt{process-post-comment.php}
+      \end{itemize}
+    \item \texttt{assets} (mapp)
+    \begin{itemize}
+      \item \texttt{img} (mapp med bilder)
+      \item \texttt{js } (mapp med javscriptfiler)
+      \item \texttt{css} (mapp med stylesheets)
     \end{itemize}
   \end{itemize}
+\end{itemize}
 
-Observera att hur många filer ni har i varje mapp beror på vad ni använder er av. Läs vidare i instruktionerna för klarare förståelse.
-
+Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni faktiskt genomför. Läs vidare i instruktionerna för klarare förståelse.
 
 
 
@@ -88,14 +97,20 @@ Observera att hur många filer ni har i varje mapp beror på vad ni använder er
 \section{Uppgifter}
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
-  \exercise{Refaktorisering}
-Innan ni börjar att byta ut alla requesters som tvingar att ladda om sidan är det bra att gå igenom sin kod för att förfina sin lösning.
+\exercise{Refaktorering}
+Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
 
- \begin{itemize}
-            \item Duplicerad kod inom ett dokument.
-            \item Duplicerad kod mellan filer.
-            \item Variabel- och metodnamn.
-  \end{itemize}
+\begin{itemize}
+  \item Organisera dina filer i en tydlig och konsistent mappstruktur.
+  \item Eliminera duplikation av liknande kod \textbf{inom ett dokument} (i.e.generalisera).
+  \item Eliminera duplikation av liknande kod \textbf{emellan dokument} (i.e. generalisera).
+  \item Bryt ut långa block av procedurell kod till \textbf{metoder}.
+  \item Låt alla \texttt{variabler}, \texttt{metoder} och \texttt{klasser} ha beskrivande och tydliga namn.
+  \item Bryt ut varje databas-query till en egen \texttt{metod}. Använd metodargument för att skicka värden.
+  \item Om flera databas-query-metoder är liknande. Försök slå ihop dem.
+  \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning.
+  \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt.
+\end{itemize}
 
   \exercise{AJAX}
 Antagligen så har du vid varje funktion anrop till servern användt dig av tekniken att ladda om hela sidan när något förändrar sig. Eftersom ett anrop till servern tar tid så är det en god ide att inte behöva ladda om sidan mer än nödvändigt och särskilt inte om det endast är delar av innehållet på sidan som skall uppdateras. För detta används istället AJAX. 
