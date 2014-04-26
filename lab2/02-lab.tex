@@ -126,14 +126,15 @@ Målet med detta steg är att skapa en sida som innehåller ett formulär. Detta
     \item Hämta saltet från databasen.
     \item Kryptera salt + lösenord och matcha mot det lösenord som finns i databasen. 
     \item Skapa en \texttt{session} för användaren.
+    \item Användaren måste på något sätt meddelas om huruvida inloggningen lyckades eller inte.
    \end{enumerate}
 
 
 
-  \exercise{Uppdatera indexsidan} 
-  Nu skall vi se till inloggningen faktiskt spelar någon roll. Målet är att ``skydda'' index-sidan. Alltså sidan där man kan posta blogginlägg som ni skapade i laboration 1.
+  \exercise{Skydda övriga sidor} 
+  Nu måste vi se till att användare som inte är inloggade inte kommer åt de sidor som kräver inloggning. Det räcker inte med att vi bara inte länkar till de sidor användaren kommer åt. Om hen skriver in adressen till en skyddad sida kan denna komma åt sidan om vi inte faktiskt kollar om denna är inloggad.
 
-  Endast användare som är inloggade skall kunna se sidan. Om man skulle skriva in adressen till sidan i webbläsarens adressfält, utan att vara inloggad, skall användaren antingen (A) motta ett meddelande om att de måste logga in, eller (B) förflyttas (\texttt{redirect}) till inloggningssidan automatiskt. 
+  Om en användare försöker nå en sida trots att den inte är inloggad behöver vi välja emellan att antingen (A) ge användaren ett meddelande om att de måste logga in, eller (B) förflytta användaren (\texttt{redirect}) till inloggningssidan automatiskt. Kom ihåg att detta gäller för alla sidor som måste skyddas.
 
   Ni behöver även skapa en knapp eller länk där användaren kan logga ut. Alltså ``radera'' användarens \texttt{session}.
 
