@@ -1,0 +1,1 @@
+jade --watch jade/*.jade -o .
