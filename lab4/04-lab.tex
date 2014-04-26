@@ -112,11 +112,15 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
   \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt.
 \end{itemize}
 
-  \exercise{AJAX}
-Antagligen så har du vid varje funktion anrop till servern användt dig av tekniken att ladda om hela sidan när något förändrar sig. Eftersom ett anrop till servern tar tid så är det en god ide att inte behöva ladda om sidan mer än nödvändigt och särskilt inte om det endast är delar av innehållet på sidan som skall uppdateras. För detta används istället AJAX. 
 
-Er uppgift är att vid varje anrop endast använda er av AJAX och utifall ni dirigeras till en annan sida vid exempelvis att skriva ett inlägg och visa inlägg skall nu detta ske på samma sida, utan att ladda om sidan. 
 
+
+\exercise{Single-page application}
+När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
+
+Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan användarens klient och servern utan att användarens webbläsare ska behöva ladda om sidan.
+
+Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
 
 
 
