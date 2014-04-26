@@ -1,61 +1,79 @@
-html5
-  meta(charset="utf-8")
-  title Labbinstuktioner | E-tjänster VT14
-
-h1 Laborationer
-p.lead E-tjänster VT14
-
-hr
+mixin file(num, href)
+  a(href="https://github.com/BinaryHeart/EServicesAndWebprograming/raw/gh-pages/lab1/01-lab.pdf")
+    span.glyphicon.glyphicon-file 
+    |  Instruktionsdokument (L
+    =num
+    | )
 
 
-h3 Laboration 1
-p Lorem ipsum dolor et amet.
-h4 Förberedelsematerial
-ul
-  li
-    a(href="#") Link 1
-  li
-    a(href="#") Link 2
-  li
-    a(href="#") Link 3
 
-hr
 
-h3 Laboration 2
-p Lorem ipsum dolor et amet.
-h4 Förberedelsematerial
-ul
-  li
-    a(href="#") Link 1
-  li
-    a(href="#") Link 2
-  li
-    a(href="#") Link 3
+html5(lang="sv")
+  head
+    meta(charset="utf-8")
+    title Labbinstuktioner | E-tjänster VT14
+    link(rel="stylesheet", href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css")
+    style
+      | .container{
+      |   max-width: 960px;
+      | }
 
-hr
+  body
+    .container
+      h1 Laborationer &mdash; E-tjänster VT14
 
-h3 Laboration 3
-p Lorem ipsum dolor et amet.
-h4 Förberedelsematerial
-ul
-  li
-    a(href="#") Link 1
-  li
-    a(href="#") Link 2
-  li
-    a(href="#") Link 3
+      hr
 
-hr
 
-h3 Laboration 4
-p Lorem ipsum dolor et amet.
-h4 Förberedelsematerial
-ul
-  li
-    a(href="#") Link 1
-  li
-    a(href="#") Link 2
-  li
-    a(href="#") Link 3
+      h3 Laboration 1
+      p I den här laborationen börjar vi arbeta med alla teknikerna <code>html</code>, <code>css</code>, <code>javascript</code>, <code>php</code> och <code>mysql</code> samtidigt. Målet är att bygga ett kommentarsflöde. Där användare kan posta och läsa kommentarer.
+      +file(1,"https://github.com/BinaryHeart/EServicesAndWebprograming/raw/gh-pages/lab1/01-lab.pdf")
+      h4 Förberedelsematerial
+      ul
+        li
+          a(href="#") Link 1
+        li
+          a(href="#") Link 2
+        li
+          a(href="#") Link 3
+
+      hr
+
+      h3 Laboration 2
+      p Lorem ipsum dolor et amet.
+      h4 Förberedelsematerial
+      ul
+        li
+          a(href="#") Link 1
+        li
+          a(href="#") Link 2
+        li
+          a(href="#") Link 3
+
+      hr
+
+      h3 Laboration 3
+      p Lorem ipsum dolor et amet.
+      h4 Förberedelsematerial
+      ul
+        li
+          a(href="#") Link 1
+        li
+          a(href="#") Link 2
+        li
+          a(href="#") Link 3
+
+      hr
+
+      h3 Laboration 4
+      p Lorem ipsum dolor et amet.
+      h4 Förberedelsematerial
+      ul
+        li
+          a(href="#") Link 1
+        li
+          a(href="#") Link 2
+        li
+          a(href="#") Link 3
 
 
