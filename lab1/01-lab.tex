@@ -62,7 +62,7 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Slutresultatet kommer vara en sida där man kan posta gäsboksinlägg. Föreställ dig en blogg där man kan posta inlägg utan att logga in.
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Målet är att bygga en kommentarssida. Slutresultatet (efter denna laboration) kommer alltså att vara en sida där vem som helst kan posta kommentarer, utan att ha en användare eller logga in.
 
 \section{Föreslagen struktur}
 Denna laboration består av 4 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
@@ -90,10 +90,10 @@ Nedan följer uppgifterna som resulterar i inlämningen ovan.
   \exercise{Formulär}
   Ett bra ställe att börja på kan vara att försöka få ett formulär att visas på en webbsida. Om du inte vill behöver du alltså inte involvera \texttt{php} än. Istället kan du arbeta med \texttt{html}.
 
-  Men poängen är alltså att -- för att användaren ska kunna posta ett blogginlägg krävs ett formulär. Vi bryr oss i denna övning inte om att försöka få formuläret att ``fungera''. Börja helt enkelt med att försöka få ett \texttt{html}-formulär med relevanta fält att visas på en \texttt{html}-sida.
+  Men poängen är alltså att -- för att användaren ska kunna posta en kommentar krävs ett formulär. Vi bryr oss i denna övning inte om att försöka få formuläret att ``fungera''. Börja helt enkelt med att försöka få ett \texttt{html}-formulär med relevanta fält att visas på en \texttt{html}-sida.
 
   \begin{enumerate}
-    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är \texttt{namn} på den som postat inlägget, \texttt{själva inlägget} och \texttt{emailadress}. Sedan skall det förstås finnas en knapp för att kunna posta inläggen.
+    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är \texttt{namn} på den som postat inlägget, \texttt{själva inlägget} och \texttt{emailadress}. Sedan skall det förstås finnas en knapp för att kunna posta inlägget.
    \end{enumerate}
 
   \exercise{Smyckning}
@@ -103,13 +103,13 @@ Nedan följer uppgifterna som resulterar i inlämningen ovan.
   Tänk på att ni under denna kurs kommer behöva kunna producera en webbapplikation med professionellt utseende. Så det finns \textbf{ingen anledning} att göra det för enkelt för sig.
 
   \begin{itemize}
-    \item Styla er sida så att den inbjuder till att vilja posta inlägg. Det skall klart och tydligt framgå vad sidan är till för. Det ska vara klart och tydligt hur man ska göra för att faktiskt posta ett inlägg.
-    \item Placera er \texttt{css} i en extern fil. Skriv alltså ingen \texttt{inline css}.
+    \item Styla er sida så att den inbjuder till att vilja posta kommentarer. Det skall klart och tydligt framgå vad sidan är till för. Det ska vara klart och tydligt hur man ska göra för att faktiskt posta en kommentar.
+    \item Placera er \texttt{css} i en extern fil. Det är alltså inte tillåtet med \texttt{inline css}.
     \item Fundera över huruvida er sida är \texttt{responsiv} (som i \texttt{responsive design}). Hur skulle den kunna göras responsiv?
   \end{itemize}
 
   \paragraph{}
-  Oseriös stilning kommer inte att godtas.
+  Oseriös stilning kommer ej att godtas.
 
 
 
@@ -128,19 +128,19 @@ Nedan följer uppgifterna som resulterar i inlämningen ovan.
   I denna övning börjar vi närma oss en fungerande produkt. Vi börjar med att designa en databas.
 
   \begin{itemize}
-    \item Skapa tabell som har hand om alla gästbooksinlägg.
+    \item Skapa tabell som har hand om alla kommentarer.
     \item Tabellen måste ha en \texttt{PK} som genereras av databasen per inlägg. Se \texttt{auto increment}.
-    \item Tabellen måste ha minst ett fält per övrigt fält i formuläret.
+    \item Tabellen måste ha minst ett fält per fält i formuläret.
   \end{itemize}
 
 
 
  \exercise{Spara och visa data}
-  Denna övning går ut på att faktiskt spara inläggen i en databas. Samt att visa dem. Ni väljer själva huruvida ni vill låta användaren posta inlägg på samma sida som inläggen visas på. Eller om inläggen ska visas på en sida, och formuläret på en annan.
+  Denna övning går ut på att faktiskt spara kommentarerna i en databas. Samt att visa dem. Ni väljer själva huruvida ni vill låta användaren posta kommentarer på samma sida som kommentarerna visas på. Eller om kommentarerna ska visas på en sida, och formuläret på en annan.
  \begin{itemize}
-    \item Börja med att försöka lägga in ett inlägg. Verifera att inlägget faktiskt ``kommer in'' genom att kolla i databasen.
-    \item När ni väl har inlägg i databasen. Försök nu istället att skriva ut innehållet ifrån databasen på den sidan som ska visa inläggen. Ni väljer själva i vilken ordning inläggen ska visas. 
-    \item Style:a inläggen så att de passar den övriga layouten.
+    \item Börja med att försöka få kommentarerna att läggas till i databasen när användaren postar formuläret. Verifera att inlägget faktiskt ``kommer in'' genom att kolla i databasen.
+    \item När ni väl har inlägg i databasen. Försök då istället att skriva ut innehållet ifrån databasen på den sidan som ska visa kommentarerna. Ni väljer själva i vilken ordning kommentarerna ska visas på sidan.
+    \item Style:a kommentarerna så att de passar den övriga layouten.
   \end{itemize}
 
 
