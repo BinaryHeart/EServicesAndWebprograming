@@ -62,7 +62,38 @@
 
 
 \section{Introduktion}
-I datasalen finns......
+Laborationerna är inte obligatoriska men stora delar av resultatet av laborationerna skall lämnas in. 
+\section{Föreslagen struktur}
+  \begin{itemize}
+    \item labb1-fornamn-efternamn (mapp)
+    \begin{itemize}
+      \item \texttt{index.php}
+      \item \texttt{registrar.php} 
+      \item \texttt{login.php}  
+      \item \texttt{assets} (mapp)
+      \begin{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js  } (mapp med javscriptfiler)
+        \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\section {Krav}
+Inlämningen består av en sida som är en gästbok för inloggade medlemmar på sajten. Det är en hjälp att göra laborationerna för en ökad förståelse för det som efterfrågas. 
+\subsection {Registrering}
+Man skall som användare kunna registrera sig på sidan. Lösenordet skall hashas och saltas för att uppnå en säkrare registrering och inloggning för användaren.
+\subsection {Inloggning och utloggning}
+Man måste vara inloggad för att kunna se inlägg från andra användare. 
+\subsection {Validering på servern och klienten}
+Man skall innan på klientsidan validera att alla fält i formulär är ifyllade med värden och att det är en giltig form på mailadressen. På serversidan skall man alltid validera det som kommer in via formulär se till att den kollas så att det inte sker någon SQL-Injections. 
+\subsection {Posta inlägg asynkront}
+På samma sida som man läser inlägg skall man också kunna posta inlägg. Dessa postningar skall ske asynkront med hjälp av AJAX. 
+
+\begin{tabular}{ l | c | r }
+  php & 2 & 3 \\ \hline
+  css & 5 & 6 \\ \hline
+  Javascript & 8 & 9 \\
+\end{tabular}
 
 
 
