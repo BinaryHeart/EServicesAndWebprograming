@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc} % åäö
+%\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+
+% No numbering
+\setcounter{secnumdepth}{0}
+
+% Counters for tasks & questions
+\newcounter{taskcounter}
+\setcounter{taskcounter}{0}
+\newcounter{stepcounter}
+\setcounter{stepcounter}{0}
+\newcounter{questioncounter}
+\setcounter{questioncounter}{0}
+
+% Exercises
+\newcommand{\exercise}[1]{
+  \refstepcounter{taskcounter}
+  \addcontentsline{toc}{subsection}{Uppgift \thetaskcounter{} #1}
+  \vspace{1em}~
+  \\\normalfont{\large{\bfseries{\hspace{0.5em}Uppgift \thetaskcounter \hspace{1em}#1}}}\\\\
+}
+
+% Remove date
+\date{}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor = blue,
+  citecolor = red
+}
+
+\lstset{
+  language=[Sharp]C,
+  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+  keywordstyle=\color[rgb]{0,0.5,0.5},
+  numberstyle=\color[rgb]{0.7,0.7,0.7},
+  commentstyle=\color[rgb]{0.1,0.5,0.1},
+  stringstyle=\color[rgb]{0.6,0.1,0.5},
+  backgroundcolor=\color[rgb]{0.95,0.95,0.95},
+  showstringspaces=false,
+  numbers=left,
+  breaklines,
+  breakatwhitespace,
+}
+
+\title{ Labb 1 }
+
+\author{ E-tjänster och webbprogrammering 7.5 hp VT-14 }
+\begin{document}
+\maketitle
+\vspace{-2em}
+%\tableofcontents
+
+
+
+\section{Introduktion}
+I denna laboration kommer vi att arbeta med HTML, CSS, PHP, Javascript och MySQL. Målet är att bygga en kommentarssida. Slutresultatet (efter denna laboration) kommer alltså att vara en sida där vem som helst kan posta kommentarer, utan att ha en användare eller logga in.
+
+\section{Föreslagen struktur}
+Denna laboration består av 4 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+  \begin{itemize}
+    \item labb1-fornamn-efternamn (mapp)
+    \begin{itemize}
+      \item \texttt{index.php} 
+      \item \texttt{assets} (mapp)
+      \begin{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js  } (mapp med javscriptfiler)
+        \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+
+\paragraph{}
+Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Läs vidare i instruktionerna för klarare förståelse.
+
+
+\pagebreak
+\section{Uppgifter}
+Nedan följer uppgifterna som resulterar i inlämningen ovan.
+
+  \exercise{Formulär}
+  Ett bra ställe att börja på kan vara att försöka få ett formulär att visas på en webbsida. Om du inte vill behöver du alltså inte involvera \texttt{php} än. Istället kan du arbeta med \texttt{html}.
+
+  Men poängen är alltså att -- för att användaren ska kunna posta en kommentar krävs ett formulär. Vi bryr oss i denna övning inte om att försöka få formuläret att ``fungera''. Börja helt enkelt med att försöka få ett \texttt{html}-formulär med relevanta fält att visas på en \texttt{html}-sida.
+
+  \begin{enumerate}
+    \item Börja med att skapa ett enkelt formulär bestående av minst 3 fält. Fälten som skall finnas är \texttt{namn} på den som postat inlägget, \texttt{själva inlägget} och \texttt{emailadress}. Sedan skall det förstås finnas en knapp för att kunna posta inlägget.
+   \end{enumerate}
+
+  \exercise{Smyckning}
+  I denna övning fokuserar vi på att sidans utseende. Alltså i huvudsak \texttt{css}. Skapa dig en mental bild (eller rita på ett papper) av hur du/ni skulle vilja att sidan ser ut. Försök sedan att realisera visionen så att sidan faktiskt ser ut som ``mockup:en''.
+
+  \paragraph{}
+  Tänk på att ni under denna kurs kommer behöva kunna producera en webbapplikation med professionellt utseende. Så det finns \textbf{ingen anledning} att göra det för enkelt för sig.
+
+  \begin{itemize}
+    \item Styla er sida så att den inbjuder till att vilja posta kommentarer. Det skall klart och tydligt framgå vad sidan är till för. Det ska vara klart och tydligt hur man ska göra för att faktiskt posta en kommentar.
+    \item Placera er \texttt{css} i en extern fil. Det är alltså inte tillåtet med \texttt{inline css}.
+    \item Fundera över huruvida er sida är \texttt{responsiv} (som i \texttt{responsive design}). Hur skulle den kunna göras responsiv?
+  \end{itemize}
+
+  \paragraph{}
+  Oseriös stilning kommer ej att godtas.
+
+
+
+  \exercise{Validering}
+  Denna övning går ut på att validera input. Ni skall se till att det finns en giltig e-postadress, att inga fält är tomma. Detta skall göras på klienten, alltså med \texttt{javascript}.
+
+  \paragraph{Krav på validering}
+    \begin{itemize}
+      \item Inga fält får vara tomma. Även strängen \texttt{"    "} räknas som tom, trots att den innehåller en massa mellanslag.
+      \item E-postadressen måste vara en giltig e-post adress. Det räcker med att validera att den innhåller ett \texttt{@}-tecken, samt minst en punkt efter.
+    \end{itemize}
+
+
+
+  \exercise{Deigna databasen}
+  I denna övning börjar vi närma oss en fungerande produkt. Vi börjar med att designa en databas.
+
+  \begin{itemize}
+    \item Skapa tabell som har hand om alla kommentarer.
+    \item Tabellen måste ha en \texttt{PK} som genereras av databasen per inlägg. Se \texttt{auto increment}.
+    \item Tabellen måste ha minst ett fält per fält i formuläret.
+  \end{itemize}
+
+
+
+ \exercise{Spara och visa data}
+  Denna övning går ut på att faktiskt spara kommentarerna i en databas. Samt att visa dem. Ni väljer själva huruvida ni vill låta användaren posta kommentarer på samma sida som kommentarerna visas på. Eller om kommentarerna ska visas på en sida, och formuläret på en annan.
+ \begin{itemize}
+    \item Börja med att försöka få kommentarerna att läggas till i databasen när användaren postar formuläret. Verifera att inlägget faktiskt ``kommer in'' genom att kolla i databasen.
+    \item När ni väl har inlägg i databasen. Försök då istället att skriva ut innehållet ifrån databasen på den sidan som ska visa kommentarerna. Ni väljer själva i vilken ordning kommentarerna ska visas på sidan.
+    \item Style:a kommentarerna så att de passar den övriga layouten.
+  \end{itemize}
+
+
+
+\end{document}

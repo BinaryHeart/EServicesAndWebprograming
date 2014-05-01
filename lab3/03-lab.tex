@@ -1,0 +1,133 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc} % åäö
+%\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+
+% No numbering
+\setcounter{secnumdepth}{0}
+
+% Counters for tasks & questions
+\newcounter{taskcounter}
+\setcounter{taskcounter}{0}
+\newcounter{stepcounter}
+\setcounter{stepcounter}{0}
+\newcounter{questioncounter}
+\setcounter{questioncounter}{0}
+
+% Exercises
+\newcommand{\exercise}[1]{
+  \refstepcounter{taskcounter}
+  \addcontentsline{toc}{subsection}{Uppgift \thetaskcounter{} #1}
+  \vspace{1em}~
+  \\\normalfont{\large{\bfseries{\hspace{0.5em}Uppgift \thetaskcounter \hspace{1em}#1}}}\\\\
+}
+
+% Remove date
+\date{}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor = blue,
+  citecolor = red
+}
+
+\lstset{
+  language=[Sharp]C,
+  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+  keywordstyle=\color[rgb]{0,0.5,0.5},
+  numberstyle=\color[rgb]{0.7,0.7,0.7},
+  commentstyle=\color[rgb]{0.1,0.5,0.1},
+  stringstyle=\color[rgb]{0.6,0.1,0.5},
+  backgroundcolor=\color[rgb]{0.95,0.95,0.95},
+  showstringspaces=false,
+  numbers=left,
+  breaklines,
+  breakatwhitespace,
+}
+
+\title{ Labb 3 }
+
+\author{ E-tjänster och webbprogrammering 7.5 hp VT-14 }
+\begin{document}
+\maketitle
+\vspace{-2em}
+%\tableofcontents
+
+
+
+\section{Introduktion}
+I denna laboration kommer vi att uttöka vårt kommentarsfält så att användare kan posta kommentarer som svar på andra kommentarer.
+
+Detta betyder att varje kommentar bör ha en länk (eller liknande), som användaren kan klicka på för att ges möjligheten att besvara just den kommentaren.
+
+Detta kommer även innebära att det kommer krävas en algoritm (i \texttt{PHP}), för att kunna sortera kommentaren så att de visas i en ``rimlig'' ordning för användaren. Hur ni väljer att sedan visuellt presentera detta väljer ni själva. Under \href{http://designm.ag/designer-showcase/well-designed-threaded-comments-sections-in-webpages/}{denna länk} finner ni en del inspiration :)
+
+
+
+\section{Föreslagen struktur}
+Denna laboration består av 3 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1 och 2. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+\begin{itemize}
+  \item \texttt{labb3-fornamn-efternamn} (mapp)
+  \begin{itemize}
+    \item \texttt{index.php}
+    \item \texttt{login.php}
+    \item \texttt{register.php}
+    \item \texttt{assets} (mapp)
+    \begin{itemize}
+      \item \texttt{img} (mapp med bilder)
+      \item \texttt{js } (mapp med javscriptfiler)
+      \item \texttt{css} (mapp med stylesheets)
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+
+
+
+
+\pagebreak
+\section{Uppgifter}
+Nedan följer uppgifterna som resulterar i inlämningen ovan.
+
+
+  \exercise{Designa databasen}
+  Först och främst måste vi uppdatera vår databasdesign. Låt oss fundera över det. Varje kommentar ska alltså kunna vara ett svar till en annan kommentar. Men eftersom varje svar är en kommentar så kan även varje svar till en kommentar ha svar. Och så vidare. Detta låter ovanligt mycket som rekursion. En kommentar kan referera till en annan kommentar.
+
+  Notera ordvalet \textbf{kan}. Om en kommentar \textbf{inte} refererar till en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
+
+  \begin{enumerate}
+    \item Lägg till en kolumn i kommentarstabellen i databasen. Kolumnen ska vara en \texttt{foreign key} som pekar på kommentarer.
+    \item Kolumnen måste vara \texttt{nullable}. Eftersom om en kommentar \textbf{inte} pekar på en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
+  \end{enumerate}
+
+
+  \exercise{Hämta \& Spara data}
+  Låt oss nu faktiskt ge användaren en möjlighet att svara på andra kommentarer. Vi har behöver alltså förändra sidan som listar kommentarer så att det går att svara på dem. Och när vi sparar en kommentar i databasen, måste vi se till att den refererar till sin eventuella ``förälder''.
+
+  \begin{enumerate}
+    \item Börja med att se till att en \texttt{reply}-länk/knapp visas under varje kommentar.
+    \item När användaren klickar på reply, behöver ni alltså skicka denna till kommentarsformuläret.
+    \item Glöm inte att skicka med ``förälderns'' (alltså kommentaren användaren vill svara på) \texttt{ID} till kommentarsformulärssidan.
+    \item Glöm inte att spara förälderns \texttt{ID} i \texttt{foreign key}-fältet när svarskommentaren sparas.
+
+  \end{enumerate}
+  Skapa nu en funktion för att kunna besvara kommentarer. Antingen skapar ni en ny sida eller att man skickas till det formulär ni redan har och sedan lägger in det i databasen. Det senare är rimligen att föredra.
+
+
+
+
+  \pagebreak
+  \exercise{Smyckning}
+  Nu är det dags att designa listningen av kommentarer. Börja med att visuellt föreställa er (med fördel: rita på ett papper) hur ni skulle vilja att er listningen av kommentarer fungerar. I vilken ordning kommer de? Indenteras de? Finns det andra visuella hjälpmedel för att förstå vem som svarar på vems kommentar?
+
+  När ni har en idé nedritad på papper är det bara att sätta igång med att försöka exekvera er design. Tänk på att vi antagligen inte bara kan lösa detta problem med \texttt{css}. Det kan även hända att det underlättar om vi skriver en annan \texttt{sql}-query eller helt enkelt sorterar kommentarerna med hjälp av \texttt{php}. Fundera och använd er kreativitet! :)
+
+
+
+\end{document}

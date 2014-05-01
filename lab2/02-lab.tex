@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\usepackage[swedish]{babel}
+\usepackage[utf8]{inputenc} % åäö
+%\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{enumitem}
+
+% No numbering
+\setcounter{secnumdepth}{0}
+
+% Counters for tasks & questions
+\newcounter{taskcounter}
+\setcounter{taskcounter}{0}
+\newcounter{stepcounter}
+\setcounter{stepcounter}{0}
+\newcounter{questioncounter}
+\setcounter{questioncounter}{0}
+
+% Exercises
+\newcommand{\exercise}[1]{
+  \refstepcounter{taskcounter}
+  \addcontentsline{toc}{subsection}{Uppgift \thetaskcounter{} #1}
+  \vspace{1em}~
+  \\\normalfont{\large{\bfseries{\hspace{0.5em}Uppgift \thetaskcounter \hspace{1em}#1}}}\\\\
+}
+
+% Remove date
+\date{}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor = blue,
+  citecolor = red
+}
+
+\lstset{
+  language=[Sharp]C,
+  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+  keywordstyle=\color[rgb]{0,0.5,0.5},
+  numberstyle=\color[rgb]{0.7,0.7,0.7},
+  commentstyle=\color[rgb]{0.1,0.5,0.1},
+  stringstyle=\color[rgb]{0.6,0.1,0.5},
+  backgroundcolor=\color[rgb]{0.95,0.95,0.95},
+  showstringspaces=false,
+  numbers=left,
+  breaklines,
+  breakatwhitespace,
+}
+
+\title{ Labb 2 }
+
+\author{ E-tjänster och webbprogrammering 7.5 hp VT-14 }
+\begin{document}
+\maketitle
+\vspace{-2em}
+%\tableofcontents
+
+
+
+\section{Introduktion}
+I denna laboration kommer vi att arbeta med \texttt{HTML}, \texttt{CSS}, \texttt{PHP}, \texttt{Javascript} och \texttt{MySQL}. Målet med denna laboration är att bygga en applikation med inloggningsfunktionalitet. Samt användarregistrering. Med fördel utgår du ifrån den applikation du byggde i labb 1 (kom ihåg att säkerhetskopiera), men vill du börja ifrån ``scratch'' går det förstås lika bra.
+
+För att lösa denna labb behöver vi oundvikligen bekanta oss med \texttt{HTTP POST} och \texttt{HTTP GET}. Såväl som koncepten \texttt{hash}:ning och \texttt{salt}:ning.
+
+
+
+\section{Föreslagen struktur}
+Denna laboration består av 6 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+  \begin{itemize}
+    \item \texttt{labb2-fornamn-efternamn} (mapp)
+      \begin{itemize}
+        \item \texttt{index.php}
+        \item \texttt{login.php}
+        \item \texttt{register.php}
+        \item \texttt{assets} (mapp)
+      \begin{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js } (mapp med javscriptfiler)
+	      \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+
+Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Läs vidare i instruktionerna för klarare förståelse.
+
+
+\pagebreak
+\section{Uppgifter}
+Nedan följer uppgifterna som resulterar i inlämningen ovan.
+
+
+\exercise{Designa databasen}
+Låt oss börja med att designa databasen. Målet är att (minst) lagra följande information om en användare: e-post, password och salt. Läs på om du inte vet vad salt är.
+\begin{enumerate}
+  \item Skapa en användartabell i databasen (enl. ovan spec.).
+  \item Tabellen måste ha en primärnyckel (\texttt{PK}) som automatiskt inkrementeras.
+\end{enumerate}
+
+
+
+
+\exercise{Skapa en registreringssidan}
+Målet med detta steg är att skapa en sida som innehåller ett formulär. Detta formulär ska innehålla alla fält som användaren behöver för att kunna registrera sig. Alltså skapa en användare.
+
+  \begin{enumerate}
+    \item Börja med att skapa \texttt{registration.php}
+    \item Fyll sidan med ett \texttt{HTML}-formulär innehållandes de komponenter användaren behöver för att fylla i relevant data.
+    \item Skriv en \texttt{PHP}-funktion som du kan använda för att randomisera fram den sträng som ska användas som salt till lösenordet.
+    \item När användaren sedan klickar på registreringsknappen, se till att skicka datat till en sida som sparar informationen i databasen.
+    \item Kom ihåg att lösenordet ska krypteras tillsammans med saltet.
+    \item Användaren måste på något sätt meddelas om huruvida registreringen lyckades eller inte.
+  \end{enumerate}
+
+
+
+  \exercise{Skapa inloggningssidan} 
+  Nu ska vi skapa en inloggningssida för samma applikation. 
+
+  \begin{enumerate}
+    \item Börja med att skapa filen \texttt{login.php}.
+    \item Fyll sidan med ett \texttt{HTML}-formulär och de komponenter användaren behöver för att fylla i relevant data.
+    \item Hämta saltet från databasen.
+    \item Kryptera salt + lösenord och matcha mot det lösenord som finns i databasen. 
+    \item Skapa en \texttt{session} för användaren.
+    \item Användaren måste på något sätt meddelas om huruvida inloggningen lyckades eller inte.
+   \end{enumerate}
+
+
+
+  \exercise{Skydda övriga sidor} 
+  Nu måste vi se till att användare som inte är inloggade inte kommer åt de sidor som kräver inloggning. Det räcker inte med att vi bara inte länkar till de sidor användaren kommer åt. Om hen skriver in adressen till en skyddad sida kan denna komma åt sidan om vi inte faktiskt kollar om denna är inloggad.
+
+  Om en användare försöker nå en sida trots att den inte är inloggad behöver vi välja emellan att antingen (A) ge användaren ett meddelande om att de måste logga in, eller (B) förflytta användaren (\texttt{redirect}) till inloggningssidan automatiskt. Kom ihåg att detta gäller för alla sidor som måste skyddas.
+
+  Ni behöver även skapa en knapp eller länk där användaren kan logga ut. Alltså ``radera'' användarens \texttt{session}.
+
+
+
+
+  \exercise{Smycka sidan} 
+  Se nu till att sidan håller ett enhetligt intryck i sin design. Oseriösa förslag godtas ej.
+
+
+
+
+  \exercise{Förslag på viktiga uttökningar} 
+  \begin{itemize}
+    \item Se till att det inte går att skapa användare med samma e-post som någon annan.
+    \item Kontrollera att användaren anger ett ``starkt'' lösenord. 
+  \end{itemize}
+
+
+\end{document}
