@@ -126,9 +126,17 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
 \exercise{Single-page application}
 När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
 
-Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan användarens klient och servern utan att användarens webbläsare ska behöva ladda om sidan.
+Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan en klient och servern utan att användarens webbläsare (klient) ska behöva ladda om sidan.
 
 Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
+
+\paragraph{}
+Om du utfört alla refaktoreringar i ovan övning kommer du märka att denna föflyttning till AJAX faktiskt inte är särskilt krånglig. Om du däremot har valt helt andra refaktoreringar kan det hända att detta visar sig svårare. Beroende på vilken fil-/mappstruktur du valt kan det som sagt hända att detta visar sig mycket svårt. Försök fundera på vad det är som gör detta svårt i ditt fall och hur du hade kunnat göra det bättre nästa gång. Refaktorera gärna mera innan du går vidare.
+
+\paragraph{}
+Den som vill kan även välja att endast låta postning och visning av kommentarer göras utan att ladda om någon sida. Med andra ord, låta login och registrering göras som vanligt. Men när användaren postar en kommentar så uppdateras sidan direkt utan att laddas om.
+
+Om du finner uppgiften svår, kan detta vara ett bra ställe att börja på.
 
 
 
