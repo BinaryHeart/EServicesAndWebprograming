@@ -1,3 +1,7 @@
+
+
+
+
 \documentclass[12pt]{article}
 \usepackage{fullpage}
 \usepackage[swedish]{babel}
@@ -62,24 +66,22 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att arbeta i två pass. I det första kommer vi att refaktorera vår applikation (alltså resultatet av tidigare labbar). För att öka nivån av ``kontroll'', struktur och läsbarhet. Vi kommer att refaktorera vår \texttt{HTML}, \texttt{CSS}, \texttt{PHP}, \texttt{JavaScript} såväl som vår \texttt{SQL}. Med andra ord all kod vi skrivit :)
+I denna laboration kommer vi att uttöka vårt kommentarsfält så att användare kan posta kommentarer som svar på andra kommentarer.
 
-I det andra passet av denna laboration kommer vi att arbeta med att bygga om vår sida till en \href{http://en.wikipedia.org/wiki/Single-page_application}{Single Page Application}. Vi kommer alltså använda det tillvägagångssätt som ofta benämns \texttt{AJAX} för att se till att användaren kan interagera med sidan som vanligt, men utan att någon sida någonsin fullständigt ``laddas om''.
+Detta betyder att varje kommentar bör ha en länk (eller liknande), som användaren kan klicka på för att ges möjligheten att besvara just den kommentaren.
+
+Detta kommer även innebära att det kommer krävas en algoritm (i \texttt{PHP}), för att kunna sortera kommentaren så att de visas i en ``rimlig'' ordning för användaren. Hur ni väljer att sedan visuellt presentera detta väljer ni själva. Under \href{http://designm.ag/designer-showcase/well-designed-threaded-comments-sections-in-webpages/}{denna länk} finner ni en del inspiration :)
+
+
 
 \section{Föreslagen struktur}
-Denna laboration består av 2 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+Denna laboration består av 3 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1 och 2. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
 \begin{itemize}
   \item \texttt{labb4-fornamn-efternamn} (mapp)
   \begin{itemize}
     \item \texttt{index.php}
-    \item \texttt{include} (mapp)
-      \begin{itemize}
-        \item \texttt{db-connect.php}
-        \item \texttt{db-queries.php}
-        \item \texttt{process-register.php}
-        \item \texttt{process-login.php}
-        \item \texttt{process-post-comment.php}
-      \end{itemize}
+    \item \texttt{login.php}
+    \item \texttt{register.php}
     \item \texttt{assets} (mapp)
     \begin{itemize}
       \item \texttt{img} (mapp med bilder)
@@ -89,7 +91,7 @@ Denna laboration består av 2 faser. Dessa är inte separata uppgifter, utan fö
   \end{itemize}
 \end{itemize}
 
-Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni faktiskt genomför. Läs vidare i instruktionerna för klarare förståelse.
+
 
 
 
@@ -97,31 +99,38 @@ Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väl
 \section{Uppgifter}
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
-\exercise{Refaktorering}
-Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
 
-\begin{itemize}
-  \item Organisera dina filer i en tydlig och konsistent mappstruktur.
-  \item Eliminera duplikation av liknande kod \textbf{inom ett dokument} (i.e.generalisera).
-  \item Eliminera duplikation av liknande kod \textbf{emellan dokument} (i.e. generalisera).
-  \item Bryt ut långa block av procedurell kod till \textbf{metoder}.
-  \item Låt alla \texttt{variabler}, \texttt{metoder} och \texttt{klasser} ha beskrivande och tydliga namn.
-  \item Bryt ut varje databas-query till en egen \texttt{metod}. Använd metodargument för att skicka värden.
-  \item Om flera databas-query-metoder är liknande. Försök slå ihop dem.
-  \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning.
-  \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt.
-\end{itemize}
+  \exercise{Designa databasen}
+  Först och främst måste vi uppdatera vår databasdesign. Låt oss fundera över det. Varje kommentar ska alltså kunna vara ett svar till en annan kommentar. Men eftersom varje svar är en kommentar så kan även varje svar till en kommentar ha svar. Och så vidare. Detta låter ovanligt mycket som rekursion. En kommentar kan referera till en annan kommentar.
+
+  Notera ordvalet \textbf{kan}. Om en kommentar \textbf{inte} refererar till en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
+
+  \begin{enumerate}
+    \item Lägg till en kolumn i kommentarstabellen i databasen. Kolumnen ska vara en \texttt{foreign key} som pekar på kommentarer.
+    \item Kolumnen måste vara \texttt{nullable}. Eftersom om en kommentar \textbf{inte} pekar på en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
+  \end{enumerate}
 
 
+  \exercise{Hämta \& Spara data}
+  Låt oss nu faktiskt ge användaren en möjlighet att svara på andra kommentarer. Vi har behöver alltså förändra sidan som listar kommentarer så att det går att svara på dem. Och när vi sparar en kommentar i databasen, måste vi se till att den refererar till sin eventuella ``förälder''.
+
+  \begin{enumerate}
+    \item Börja med att se till att en \texttt{reply}-länk/knapp visas under varje kommentar.
+    \item När användaren klickar på reply, behöver ni alltså skicka denna till kommentarsformuläret.
+    \item Glöm inte att skicka med ``förälderns'' (alltså kommentaren användaren vill svara på) \texttt{ID} till kommentarsformulärssidan.
+    \item Glöm inte att spara förälderns \texttt{ID} i \texttt{foreign key}-fältet när svarskommentaren sparas.
+
+  \end{enumerate}
+  Skapa nu en funktion för att kunna besvara kommentarer. Antingen skapar ni en ny sida eller att man skickas till det formulär ni redan har och sedan lägger in det i databasen. Det senare är rimligen att föredra.
 
 
-\exercise{Single-page application}
-När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
 
-Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan användarens klient och servern utan att användarens webbläsare ska behöva ladda om sidan.
 
-Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
+  \pagebreak
+  \exercise{Smyckning}
+  Nu är det dags att designa listningen av kommentarer. Börja med att visuellt föreställa er (med fördel: rita på ett papper) hur ni skulle vilja att er listningen av kommentarer fungerar. I vilken ordning kommer de? Indenteras de? Finns det andra visuella hjälpmedel för att förstå vem som svarar på vems kommentar?
 
+  När ni har en idé nedritad på papper är det bara att sätta igång med att försöka exekvera er design. Tänk på att vi antagligen inte bara kan lösa detta problem med \texttt{css}. Det kan även hända att det underlättar om vi skriver en annan \texttt{sql}-query eller helt enkelt sorterar kommentarerna med hjälp av \texttt{php}. Fundera och använd er kreativitet! :)
 
 
 
