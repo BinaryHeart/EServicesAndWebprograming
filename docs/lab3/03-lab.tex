@@ -51,7 +51,7 @@
   breakatwhitespace,
 }
 
-\title{ Labb 4 }
+\title{ Labb 3 }
 
 \author{ E-tjänster och webbprogrammering 7.5 hp VT-14 }
 \begin{document}
@@ -66,12 +66,20 @@ I denna laboration kommer vi att arbeta i två pass. I det första kommer vi att
 
 I det andra passet av denna laboration kommer vi att arbeta med att bygga om vår sida till en \href{http://en.wikipedia.org/wiki/Single-page_application}{Single Page Application}. Vi kommer alltså använda det tillvägagångssätt som ofta benämns \texttt{AJAX} för att se till att användaren kan interagera med sidan som vanligt, men utan att någon sida någonsin fullständigt ``laddas om''.
 
+\pagebreak
 \section{Föreslagen struktur}
 Denna laboration består av 2 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
 \begin{itemize}
-  \item \texttt{labb4-fornamn-efternamn} (mapp)
+  \item \texttt{labb3-fornamn-efternamn} (mapp)
   \begin{itemize}
     \item \texttt{index.php}
+    \item \texttt{partials} (mapp)
+      \begin{itemize}
+        \item \texttt{login.php}
+        \item \texttt{register.php}
+        \item \texttt{posts-new.php}
+        \item \texttt{posts-list.php}
+      \end{itemize}
     \item \texttt{include} (mapp)
       \begin{itemize}
         \item \texttt{db-connect.php}
@@ -106,10 +114,10 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
   \item Eliminera duplikation av liknande kod \textbf{emellan dokument} (i.e. generalisera).
   \item Bryt ut långa block av procedurell kod till \textbf{metoder}.
   \item Låt alla \texttt{variabler}, \texttt{metoder} och \texttt{klasser} ha beskrivande och tydliga namn.
-  \item Bryt ut varje databas-query till en egen \texttt{metod}. Använd metodargument för att skicka värden.
+  \item Bryt ut varje databas-query till en egen \texttt{metod}. Använd metodargument för att skicka värden. Exempel: \texttt{createPost(\$author, \$message);}
   \item Om flera databas-query-metoder är liknande. Försök slå ihop dem.
-  \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning.
-  \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt.
+  \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning. I förslaget så har man valt att låta alla ``visuella'' filer bo i mappen \texttt{partials}. Sedan inkluderar \texttt{index.php} ``rätt fil'' beroende på vad som ska göras vid det givna tillfället. Vyerna (alltså mappen \texttt{partials}) samt \texttt{index.php} använder i sin tur filer ifrån \texttt{include} när komplexare operationer (såsom att skriva till databasen eller validera input) behöver utföras.
+  \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt. Du måste inte följa strukturen som är föreslagen i detta dokument. Men det är viktigt att du \textbf{har} en struktur.
 \end{itemize}
 
 
@@ -118,9 +126,17 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
 \exercise{Single-page application}
 När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
 
-Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan användarens klient och servern utan att användarens webbläsare ska behöva ladda om sidan.
+Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan en klient och servern utan att användarens webbläsare (klient) ska behöva ladda om sidan.
 
 Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
+
+\paragraph{}
+Om du utfört alla refaktoreringar i ovan övning kommer du märka att denna föflyttning till AJAX faktiskt inte är särskilt krånglig. Om du däremot har valt helt andra refaktoreringar kan det hända att detta visar sig svårare. Beroende på vilken fil-/mappstruktur du valt kan det som sagt hända att detta visar sig mycket svårt. Försök fundera på vad det är som gör detta svårt i ditt fall och hur du hade kunnat göra det bättre nästa gång. Refaktorera gärna mera innan du går vidare.
+
+\paragraph{}
+Den som vill kan även välja att endast låta postning och visning av kommentarer göras utan att ladda om någon sida. Med andra ord, låta login och registrering göras som vanligt. Men när användaren postar en kommentar så uppdateras sidan direkt utan att laddas om.
+
+Om du finner uppgiften svår, kan detta vara ett bra ställe att börja på.
 
 
 
