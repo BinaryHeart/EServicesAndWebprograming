@@ -62,7 +62,23 @@
 
 
 \section{Introduktion}
-Laborationerna är inte obligatoriska men stora delar av resultatet av laborationerna skall lämnas in. 
+Laborationerna i sig är inte obligatoriska. Således finns det inte heller någon inlämning per laboration. Den som utför laborationerna kommer dock att ha ett \textbf{signifikant försprång} när det kommer till denna uppgift. Denna uppgift är obligatorisk och ska redovisas muntligt.
+
+\section{Uppgiften}
+Uppgiften går ut på att skapa en sida med kommentarsfunktionalitet. Endast inloggade användare ska kunna posta kommentarer. Således behöver användare kunna registrera sig och logga in. Användare ska även kunna logga ut. Kommentarer listas med avsändare och meddelande. Den användare som är inloggad är den som står som avsändare för en kommentar. Användare måste registreras med E-post lösenord.
+
+Alla fält ska (på ett adekvat sätt) valideras på både klient-, och serversidan. Använderes lösenord får \textbf{inte} sparas som plain-text, utan ska hash:as och saltas. Alla sidor måste vara skyddade ifrån \texttt{SQL injections}.
+
+Kommentarer ska postas genom AJAX (alltså utan att sidan laddas om). Mer funktionalitet \textbf{får} utföras genom AJAX.
+
+Sidan ska se professionell ut. Oseriösa eller slarviga inlämningar godtas ej.
+
+
+
+
+
+
+\pagebreak
 \section{Föreslagen struktur}
   \begin{itemize}
     \item labb1-fornamn-efternamn (mapp)
@@ -78,16 +94,9 @@ Laborationerna är inte obligatoriska men stora delar av resultatet av laboratio
       \end{itemize}
     \end{itemize}
   \end{itemize}
-\section {Krav}
-Inlämningen består av en sida som är en gästbok för inloggade medlemmar på sajten. Det är en hjälp att göra laborationerna för en ökad förståelse för det som efterfrågas. 
-\subsection {Registrering}
-Man skall som användare kunna registrera sig på sidan. Lösenordet skall hashas och saltas för att uppnå en säkrare registrering och inloggning för användaren.
-\subsection {Inloggning och utloggning}
-Man måste vara inloggad för att kunna se inlägg från andra användare. 
-\subsection {Validering på servern och klienten}
-Man skall innan på klientsidan validera att alla fält i formulär är ifyllade med värden och att det är en giltig form på mailadressen. På serversidan skall man alltid validera det som kommer in via formulär se till att den kollas så att det inte sker någon SQL-Injections. 
-\subsection {Posta inlägg asynkront}
-På samma sida som man läser inlägg skall man också kunna posta inlägg. Dessa postningar skall ske asynkront med hjälp av AJAX. 
+
+
+
 
 \begin{tabular}{ l | c | r }
   php & 2 & 3 \\ \hline
