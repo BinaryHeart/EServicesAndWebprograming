@@ -62,12 +62,12 @@
 
 
 \section{Introduktion}
-Laborationerna i sig är inte obligatoriska. Således finns det inte heller någon inlämning per laboration. Den som utför laborationerna kommer dock att ha ett \textbf{signifikant försprång} när det kommer till denna uppgift. Denna uppgift är obligatorisk och ska redovisas muntligt.
+Laborationerna i sig är inte obligatoriska. Således finns det inte heller någon inlämning per laboration. Den som utför laborationerna kommer dock att ha ett \textbf{signifikant försprång} när det kommer till denna uppgift. Denna uppgift är obligatorisk och ska (1) lämnas in, (2) rättas, och sedan (3) redovisas vid en individuell dugga.
 
 \section{Uppgiften}
-Uppgiften går ut på att skapa en sida med kommentarsfunktionalitet. Endast inloggade användare ska kunna posta kommentarer. Således behöver användare kunna registrera sig och logga in. Användare ska även kunna logga ut. Kommentarer listas med avsändare och meddelande. Den användare som är inloggad är den som står som avsändare för en kommentar. Användare måste registreras med E-post lösenord.
+Uppgiften går ut på att skapa en sida med kommentarsfunktionalitet. Endast inloggade användare ska kunna posta kommentarer. Således behöver användare kunna registrera sig och logga in. Användare ska även kunna logga ut. Kommentarer listas med avsändare och meddelande. Den användare som är inloggad är den som står som avsändare för en kommentar. Användare måste registreras med e-post och lösenord.
 
-Alla fält ska (på ett adekvat sätt) valideras på både klient-, och serversidan. Använderes lösenord får \textbf{inte} sparas som plain-text, utan ska hash:as och saltas. Alla sidor måste vara skyddade ifrån \texttt{SQL injections}.
+All formulärdata ska (på ett adekvat sätt) valideras på både klient-, och serversidan. Använderes lösenord får \textbf{inte} sparas som plain-text, utan ska hash:as och saltas. Alla sidor måste vara skyddade ifrån \texttt{SQL injections}.
 
 Kommentarer ska postas genom AJAX (alltså utan att sidan laddas om). Mer funktionalitet \textbf{får} utföras genom AJAX.
 
@@ -78,14 +78,43 @@ Sidan ska se professionell ut. Oseriösa eller slarviga inlämningar godtas ej.
 
 
 
+
 \pagebreak
 \section{Föreslagen struktur}
+Denna filstruktur är bara ett av otaliga sätt att angripa detta problem. Du bör alltså endast tolka nedan som inspiration till en lösning. Kanske ser din lösning ut så här. Kanske inte. Det viktiga är att du uppfyller kraven.
+
   \begin{itemize}
-    \item labb1-fornamn-efternamn (mapp)
+    \item lab-handin-fornamn-efternamn (mapp)
     \begin{itemize}
       \item \texttt{index.php}
-      \item \texttt{registrar.php} 
-      \item \texttt{login.php}  
+      \item \texttt{register.php}
+      \item \texttt{register-process.php}
+      \item \texttt{login.php}
+      \item \texttt{login-process.php}
+      \item \texttt{logout-process.php}
+      \item \texttt{posts.php}
+      \item \texttt{posts-create.php}
+      \item \texttt{include} (mapp som innehåller filer som inte bör navigeras till)
+      \begin{itemize}
+        \item \texttt{bootstrap.php} (Fil som include:ar alla klasser så att det räcker med att ladda in den här filen. Samt utför vitala aktiviteter såsom att t.ex. starta sessionen.
+        \item \texttt{views} (mapp som innehåller \texttt{html}-fokuserade filer)
+        \begin{itemize}
+          \item \texttt{\_header.php}
+          \item \texttt{\_footer.php}
+          \item \texttt{\_posts-list.php}
+          \item \texttt{\_posts-new.php}
+          \item \texttt{login.php}
+          \item \texttt{posts.php}
+          \item \texttt{register.php}
+        \end{itemize}
+        \item \texttt{models} (mapp som innehåller \texttt{klasser})
+        \begin{itemize}
+          \item \texttt{db.php}
+          \item \texttt{user.php}
+          \item \texttt{post.php}
+          \item \texttt{authorizer.php}
+        \end{itemize}
+      \end{itemize}
       \item \texttt{assets} (mapp)
       \begin{itemize}
         \item \texttt{img} (mapp med bilder)
@@ -94,6 +123,19 @@ Sidan ska se professionell ut. Oseriösa eller slarviga inlämningar godtas ej.
       \end{itemize}
     \end{itemize}
   \end{itemize}
+
+
+\subsection{Notiser om strukturen}
+I mappen \texttt{views} används underscore (\texttt{\_}) för att denotera en ``partial view''. Med andra ord så kommer en få en fullvärdig \texttt{html}-sida (ändå ifrån \texttt{<html>} till \texttt{</html>}) om en väljer att \texttt{include}:a t.ex. \texttt{posts.php}. Men inte om en inkluderar t.ex \texttt{\_header.php}. Detta är endast konvention, men en god konvention att följa.
+
+\paragraph{}
+Mappen \texttt{models} heter just så för att denotera att den innehåller filer som korresponderar till klasser. Filen \texttt{post.php} kan t.ex. således antas innehålla en definition för klassen \texttt{Post}. Vi rekommenderar starkt att ni arbetar med \texttt{php} objektorienterat. Men om ni \textbf{inte} gör det hade mappen lika gärna kunnat heta \texttt{functions.php}. Isåfall skulle mappen rimligen innehålla ett gäng \texttt{php}-filer (t.ex. \texttt{db-connect.php}) som i sin tur definierar en mängd metoder som vi sedan kan anropa. Såsom t.ex. \texttt{connect\_to\_db();} eller \texttt{create\_post(\$author, \$message);}.
+
+\paragraph{}
+Om du istället blandar \texttt{oop} och \texttt{procedurell} kod så kanske du t.o.m. både vill ha en mapp som heter \texttt{functions} och en som heter \texttt{models}.
+
+\paragraph{}
+Mappen \texttt{include} innehåller alltså filer som inte bör navigeras till. Vi bör alltså inte låta användaren skriva in \texttt{url}:en \texttt{www.example.com/include/bootstrap.php}. Denna mapp innehåller alltså istället filer som \texttt{include}:as av övriga ``topp-nivå''-filer. Dessa ``topp-nivå''-filer kan alltså ses som spindlarna i nätet som ser till att alla delar surras ihop korrekt.
 
 
 
