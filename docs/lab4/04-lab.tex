@@ -66,22 +66,34 @@
 
 
 \section{Introduktion}
-I denna laboration kommer vi att uttöka vårt kommentarsfält så att användare kan posta kommentarer som svar på andra kommentarer.
-
-Detta betyder att varje kommentar bör ha en länk (eller liknande), som användaren kan klicka på för att ges möjligheten att besvara just den kommentaren.
-
-Detta kommer även innebära att det kommer krävas en algoritm (i \texttt{PHP}), för att kunna sortera kommentaren så att de visas i en ``rimlig'' ordning för användaren. Hur ni väljer att sedan visuellt presentera detta väljer ni själva. Under \href{http://designm.ag/designer-showcase/well-designed-threaded-comments-sections-in-webpages/}{denna länk} finner ni en del inspiration :)
+I denna laboration kommer vi att arbeta med att bygga om vår sida till en \href{http://en.wikipedia.org/wiki/Single-page_application}{Single Page Application}. Vi kommer alltså använda det tillvägagångssätt som ofta benämns som \texttt{AJAX} för att se till att användaren kan interagera med sidan som vanligt, men utan att någon sida någonsin fullständigt ``laddas om''.
 
 
 
+
+
+\pagebreak
 \section{Föreslagen struktur}
-Denna laboration består av 3 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1 och 2. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+Denna laboration består endast av 1 fas. Detta är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
 \begin{itemize}
-  \item \texttt{labb4-fornamn-efternamn} (mapp)
+  \item \texttt{labb3-fornamn-efternamn} (mapp)
   \begin{itemize}
     \item \texttt{index.php}
-    \item \texttt{login.php}
-    \item \texttt{register.php}
+    \item \texttt{partials} (mapp)
+      \begin{itemize}
+        \item \texttt{login.php}
+        \item \texttt{register.php}
+        \item \texttt{posts-new.php}
+        \item \texttt{posts-list.php}
+      \end{itemize}
+    \item \texttt{include} (mapp)
+      \begin{itemize}
+        \item \texttt{db-connect.php}
+        \item \texttt{db-queries.php}
+        \item \texttt{process-register.php}
+        \item \texttt{process-login.php}
+        \item \texttt{process-post-comment.php}
+      \end{itemize}
     \item \texttt{assets} (mapp)
     \begin{itemize}
       \item \texttt{img} (mapp med bilder)
@@ -90,6 +102,9 @@ Denna laboration består av 3 faser. Dessa är inte separata uppgifter, utan fö
     \end{itemize}
   \end{itemize}
 \end{itemize}
+
+Er faktiska filstruktur kan förstås markant variera beroende på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni valt att uföra i föregående labb.
+
 
 
 
@@ -100,37 +115,25 @@ Denna laboration består av 3 faser. Dessa är inte separata uppgifter, utan fö
 Nedan följer uppgifterna som resulterar i inlämningen ovan.
 
 
-  \exercise{Designa databasen}
-  Först och främst måste vi uppdatera vår databasdesign. Låt oss fundera över det. Varje kommentar ska alltså kunna vara ett svar till en annan kommentar. Men eftersom varje svar är en kommentar så kan även varje svar till en kommentar ha svar. Och så vidare. Detta låter ovanligt mycket som rekursion. En kommentar kan referera till en annan kommentar.
 
-  Notera ordvalet \textbf{kan}. Om en kommentar \textbf{inte} refererar till en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
+\exercise{Single-page application}
+När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
 
-  \begin{enumerate}
-    \item Lägg till en kolumn i kommentarstabellen i databasen. Kolumnen ska vara en \texttt{foreign key} som pekar på kommentarer.
-    \item Kolumnen måste vara \texttt{nullable}. Eftersom om en kommentar \textbf{inte} pekar på en annan kommentar så implicerar det att kommentaren inte är ett svar till en annan.
-  \end{enumerate}
+\paragraph{}
+Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan en klient och servern utan att användarens webbläsare (klient) ska behöva ladda om sidan.
 
+\paragraph{}
+Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
 
-  \exercise{Hämta \& Spara data}
-  Låt oss nu faktiskt ge användaren en möjlighet att svara på andra kommentarer. Vi har behöver alltså förändra sidan som listar kommentarer så att det går att svara på dem. Och när vi sparar en kommentar i databasen, måste vi se till att den refererar till sin eventuella ``förälder''.
+\paragraph{}
+Om du utfört alla refaktoreringar i ovan övning kommer du märka att denna föflyttning till AJAX faktiskt inte är särskilt krånglig. Om du däremot har valt helt andra refaktoreringar kan det hända att detta visar sig svårare. Beroende på vilken fil-/mappstruktur du valt kan det som sagt hända att detta visar sig mycket svårt. Försök fundera på vad det är som gör detta svårt i ditt fall och hur du hade kunnat göra det bättre nästa gång. Refaktorera gärna mera innan du går vidare.
 
-  \begin{enumerate}
-    \item Börja med att se till att en \texttt{reply}-länk/knapp visas under varje kommentar.
-    \item När användaren klickar på reply, behöver ni alltså skicka denna till kommentarsformuläret.
-    \item Glöm inte att skicka med ``förälderns'' (alltså kommentaren användaren vill svara på) \texttt{ID} till kommentarsformulärssidan.
-    \item Glöm inte att spara förälderns \texttt{ID} i \texttt{foreign key}-fältet när svarskommentaren sparas.
+\paragraph{}
+Den som vill kan även välja att endast låta postning och visning av kommentarer göras utan att ladda om någon sida. Med andra ord, låta login och registrering göras som vanligt. Men när användaren postar en kommentar så uppdateras sidan direkt utan att laddas om.
 
-  \end{enumerate}
-  Skapa nu en funktion för att kunna besvara kommentarer. Antingen skapar ni en ny sida eller att man skickas till det formulär ni redan har och sedan lägger in det i databasen. Det senare är rimligen att föredra.
+\paragraph{}
+Om du finner uppgiften svår, kan detta vara ett bra ställe att börja på.
 
-
-
-
-  \pagebreak
-  \exercise{Smyckning}
-  Nu är det dags att designa listningen av kommentarer. Börja med att visuellt föreställa er (med fördel: rita på ett papper) hur ni skulle vilja att er listningen av kommentarer fungerar. I vilken ordning kommer de? Indenteras de? Finns det andra visuella hjälpmedel för att förstå vem som svarar på vems kommentar?
-
-  När ni har en idé nedritad på papper är det bara att sätta igång med att försöka exekvera er design. Tänk på att vi antagligen inte bara kan lösa detta problem med \texttt{css}. Det kan även hända att det underlättar om vi skriver en annan \texttt{sql}-query eller helt enkelt sorterar kommentarerna med hjälp av \texttt{php}. Fundera och använd er kreativitet! :)
 
 
 
