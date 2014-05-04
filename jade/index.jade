@@ -5,7 +5,7 @@ mixin file(text, href)
     = text
 
 mixin lab-file(num, href)
-  +file("Instruktionsdokument (L"+num+")")
+  +file("Instruktionsdokument (L"+num+")", href)
 
 
 
@@ -90,13 +90,7 @@ html5(lang="sv")
       p I den här laborationen arbetar vi med att <code>refaktorera</code> vår kod. Vi experimenterar med olika tekniker och strategier en kan använda för att kunna uppnå större kontroll över koden i en applikation. Utan att förändra funktionalitet.
       +lab-file(3, "docs/lab3/03-lab.pdf")
       h4 Förberedelsematerial
-      ul
-        li
-          a(href="#") Link 1
-        li
-          a(href="#") Link 2
-        li
-          a(href="#") Link 3
+      p Kommer snart...
 
       hr
 
@@ -104,13 +98,7 @@ html5(lang="sv")
       p I den här slutgiltiga laborationen introducerar vi <code>AJAX</code>. Målet blir att göra om vår applikation till en <code>Single Page Application</code>.
       +lab-file(4, "docs/lab4/04-lab.pdf")
       h4 Förberedelsematerial
-      ul
-        li
-          a(href="#") Link 1
-        li
-          a(href="#") Link 2
-        li
-          a(href="#") Link 3
+      p Kommer snart...
 
 
       hr
