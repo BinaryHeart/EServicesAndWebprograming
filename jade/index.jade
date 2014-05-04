@@ -1,9 +1,12 @@
-mixin file(num, href)
+mixin file(text, href)
   a(href!=href)
     span.glyphicon.glyphicon-file 
-    |  Instruktionsdokument (L
-    =num
-    | )
+    |  
+    = text
+
+mixin lab-file(num, href)
+  +file("Instruktionsdokument (L"+num+")")
+
 
 
 
@@ -17,35 +20,65 @@ html5(lang="sv")
       | .container{
       |   max-width: 960px;
       | }
+      | body{
+      |   margin-bottom: 30px;
+      | }
 
   body
     .container
-      h1 Laborationer &mdash; E-tjänster VT14
+      h1 Labbinstruktioner &mdash; E-tjänster VT14
+
+      p Ingen av laborationerna har obligatoriska inlämningar. Däremot kommer du behöva lämna in en slutgiltig laborationsuppgift. Denna slutgiltiga laborationsuppgift kommer att vara <b>signifikant</b> lättare att genomföra om du faktiskt deltagit på laborationerna. Det är nämligen i stort sett den uppgiften vi jobbar med på laborationerna. Den slutgiltiga laborationsuppgiften ska lämnas in på Studentportalen och ska sedan muntligt redovisas individuellt.
+
+      p Vänligen <b>ladda inte ned de länkade pdf-filer</b> (eller denna sida för den delen) utan hämta de härifrån inför varje laboration. Eftersom vi skribenter bara är människor så är det mycket troligt att några fel råkat slinka in här och där. Således uppdaterar vi dokumenten kontinuerligt om så fort vi eller ni upptäcker att någonting är fel eller oklart. Så vänligen öppna alltså alltid dokumenten genom denna webbsida.
 
       hr
 
 
       h3 Laboration 1
       p I den här laborationen börjar vi arbeta med alla teknikerna <code>html</code>, <code>css</code>, <code>javascript</code>, <code>php</code> och <code>mysql</code> samtidigt. Målet är att bygga ett kommentarsflöde. Där användare kan posta och läsa kommentarer.
-      +file(1, "docs/lab1/01-lab.pdf")
+      +lab-file(1, "docs/lab1/01-lab.pdf")
       h4 Förberedelsematerial
       ul
-        li
-          a(href="#") Link 1
-        li
-          a(href="#") Link 2
-        li
-          a(href="#") Link 3
+        li HTML, CSS, JavaScript
+          ul
+            li
+              a(href="http://htmlhunden.se/dist/toc.html") HTMLHunden &mdash; Alla kapitel om HTML
+            li
+              a(href="http://htmlhunden.se/dist/toc.html") HTMLHunden &mdash; Alla kapitel om CSS
+            li
+              a(href="http://htmlhunden.se/dist/toc.html") HTMLHunden &mdash; Alla kapitel om JavaScript
+        li PHP
+          ul
+            li
+              a(href="http://htmlhunden.se/dist/08-00-php-intro.html") HTMLHunden &mdash; 8.0 PHP Introduktion
+            li
+              a(href="http://htmlhunden.se/dist/08-01-php-installation.html") HTMLHunden &mdash; 8.1 PHP Installation
+            li
+              a(href="http://htmlhunden.se/dist/08-02-php-syntax.html") HTMLHunden &mdash; 8.2 PHP Syntax
+            li
+              a(href="http://htmlhunden.se/dist/08-03-php-debugging.html") HTMLHunden &mdash; 8.3 PHP Felsökningstekniker
+            li
+              a(href="http://htmlhunden.se/dist/08-04-php-data-forms.html") HTMLHunden &mdash; 8.4 PHP Att skicka data till servern
+        li MySQL
+          ul
+            li
+              a(href="http://htmlhunden.se/dist/09-00-mysql-intro.html") HTMLHunden &mdash; 9.0 MySQL Introduktion
+            li
+              a(href="http://htmlhunden.se/dist/09-03-mysql-api.html") HTMLHunden &mdash; 9.3 MySQL PHP API
+
+
+          
 
       hr
 
       h3 Laboration 2
-      p I den här laborationen ska vi arbeta med <code>sessions</code>. Vi bygger registrerings- och inloggningsfunktionalitet till den sida vi byggde i föregående laboration.
-      +file(2, "docs/lab2/02-lab.pdf")
+      p I den här laborationen ska vi arbeta med <code>sessions</code>, <code>hash</code>:ning och <code>salt</code>:ning. Vi bygger registrerings- och inloggningsfunktionalitet till den sida vi byggde i föregående laboration.
+      +lab-file(2, "docs/lab2/02-lab.pdf")
       h4 Förberedelsematerial
       ul
         li
-          a(href="#") Link 1
+          a(href="http://www.youtube.com/watch?v=6h2QbW0aL_8") PHP User authentication (video ~12 min)
         li
           a(href="#") Link 2
         li
@@ -54,8 +87,8 @@ html5(lang="sv")
       hr
 
       h3 Laboration 3
-      p I den här laborationen arbetar vi först med att <code>refaktorera</code> vår kod. Vi experimenterar med olika tekniker och strategier en kan använda för att kunna uppnå större kontroll över koden i en applikation. Utan att förändra funktionalitet. Sedan introducerar vi <code>AJAX</code>. Målet blir att göra om vår applikation till en <code>Single Page Application</code>.
-      +file(3, "docs/lab3/03-lab.pdf")
+      p I den här laborationen arbetar vi med att <code>refaktorera</code> vår kod. Vi experimenterar med olika tekniker och strategier en kan använda för att kunna uppnå större kontroll över koden i en applikation. Utan att förändra funktionalitet.
+      +lab-file(3, "docs/lab3/03-lab.pdf")
       h4 Förberedelsematerial
       ul
         li
@@ -68,8 +101,8 @@ html5(lang="sv")
       hr
 
       h3 Laboration 4
-      p I den här slutgiltiga laborationen tränar vi både på att skriva <code>algoritmer</code> i <code>php</code> såväl som rekursiva/cirkulära databasmodeller. Vi fortsätter på kommentarsflödesapplikationen och gör så att kommentarer kan vara svar på andra kommentarer.
-      +file(4, "docs/lab4/04-lab.pdf")
+      p I den här slutgiltiga laborationen introducerar vi <code>AJAX</code>. Målet blir att göra om vår applikation till en <code>Single Page Application</code>.
+      +lab-file(4, "docs/lab4/04-lab.pdf")
       h4 Förberedelsematerial
       ul
         li
@@ -78,5 +111,13 @@ html5(lang="sv")
           a(href="#") Link 2
         li
           a(href="#") Link 3
+
+
+      hr
+
+
+      h3 Obligatorisk slutlig inlämning
+      p Denna uppgift är i stort sett alla laborationerna kombinerade. Men med vissa tillägg och vissa borttagningar. Så läs igenom kravdokumentet noga.
+      +file("Slutgiltig inlämning", "docs/final-handin/final-handin.pdf")
 
 

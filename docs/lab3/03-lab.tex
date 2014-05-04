@@ -64,40 +64,53 @@
 \section{Introduktion}
 I denna laboration kommer vi att arbeta i två pass. I det första kommer vi att refaktorera vår applikation (alltså resultatet av tidigare labbar). För att öka nivån av ``kontroll'', struktur och läsbarhet. Vi kommer att refaktorera vår \texttt{HTML}, \texttt{CSS}, \texttt{PHP}, \texttt{JavaScript} såväl som vår \texttt{SQL}. Med andra ord all kod vi skrivit :)
 
-I det andra passet av denna laboration kommer vi att arbeta med att bygga om vår sida till en \href{http://en.wikipedia.org/wiki/Single-page_application}{Single Page Application}. Vi kommer alltså använda det tillvägagångssätt som ofta benämns \texttt{AJAX} för att se till att användaren kan interagera med sidan som vanligt, men utan att någon sida någonsin fullständigt ``laddas om''.
 
 \pagebreak
 \section{Föreslagen struktur}
-Denna laboration består av 2 faser. Dessa är inte separata uppgifter, utan föreslagna steg för att bygga ovan nämnd applikation. Som alltså är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
-\begin{itemize}
-  \item \texttt{labb3-fornamn-efternamn} (mapp)
+Denna laboration består endast av 1 fas. Detta är en vidarutveckling av den applikation vi byggt i labb 1 och 2. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
+
   \begin{itemize}
-    \item \texttt{index.php}
-    \item \texttt{partials} (mapp)
-      \begin{itemize}
-        \item \texttt{login.php}
-        \item \texttt{register.php}
-        \item \texttt{posts-new.php}
-        \item \texttt{posts-list.php}
-      \end{itemize}
-    \item \texttt{include} (mapp)
-      \begin{itemize}
-        \item \texttt{db-connect.php}
-        \item \texttt{db-queries.php}
-        \item \texttt{process-register.php}
-        \item \texttt{process-login.php}
-        \item \texttt{process-post-comment.php}
-      \end{itemize}
-    \item \texttt{assets} (mapp)
+    \item lab3-fornamn-efternamn (mapp)
     \begin{itemize}
-      \item \texttt{img} (mapp med bilder)
-      \item \texttt{js } (mapp med javscriptfiler)
-      \item \texttt{css} (mapp med stylesheets)
+      \item \texttt{index.php}
+      \item \texttt{register.php}
+      \item \texttt{register-process.php}
+      \item \texttt{login.php}
+      \item \texttt{login-process.php}
+      \item \texttt{logout-process.php}
+      \item \texttt{posts.php}
+      \item \texttt{posts-create.php}
+      \item \texttt{include} (mapp som innehåller filer som inte bör navigeras till)
+      \begin{itemize}
+        \item \texttt{bootstrap.php} (Fil som include:ar alla klasser så att det räcker med att ladda in den här filen. Samt utför vitala aktiviteter såsom att t.ex. starta sessionen.
+        \item \texttt{views} (mapp som innehåller \texttt{html}-fokuserade filer)
+        \begin{itemize}
+          \item \texttt{\_header.php}
+          \item \texttt{\_footer.php}
+          \item \texttt{\_posts-list.php}
+          \item \texttt{\_posts-new.php}
+          \item \texttt{login.php}
+          \item \texttt{posts.php}
+          \item \texttt{register.php}
+        \end{itemize}
+        \item \texttt{models} (mapp som innehåller \texttt{klasser})
+        \begin{itemize}
+          \item \texttt{db.php}
+          \item \texttt{user.php}
+          \item \texttt{post.php}
+          \item \texttt{authorizer.php}
+        \end{itemize}
+      \end{itemize}
+      \item \texttt{assets} (mapp)
+      \begin{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js  } (mapp med javscriptfiler)
+        \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
     \end{itemize}
   \end{itemize}
-\end{itemize}
 
-Hur många filer ni har i varje mapp beror förstås på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni faktiskt genomför. Läs vidare i instruktionerna för klarare förståelse.
+Er faktiska filstruktur kan förstås markant variera beroende på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni faktiskt genomför. Läs vidare i instruktionerna för klarare förståelse.
 
 
 
@@ -119,24 +132,6 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
   \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning. I förslaget så har man valt att låta alla ``visuella'' filer bo i mappen \texttt{partials}. Sedan inkluderar \texttt{index.php} ``rätt fil'' beroende på vad som ska göras vid det givna tillfället. Vyerna (alltså mappen \texttt{partials}) samt \texttt{index.php} använder i sin tur filer ifrån \texttt{include} när komplexare operationer (såsom att skriva till databasen eller validera input) behöver utföras.
   \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt. Du måste inte följa strukturen som är föreslagen i detta dokument. Men det är viktigt att du \textbf{har} en struktur.
 \end{itemize}
-
-
-
-
-\exercise{Single-page application}
-När vi ifrån en webbsida, navigerar till en annan sida, så behöver webbläsaren ``ladda om''. Detta gäller alltså förstås då även när vi t.ex. postar formulär. I vårat fall -- när användaren postar kommentarer.
-
-Den teknikfamilj som ofta benämns \texttt{AJAX} används alltså för att kunna skicka data fram och tillbaka emellan en klient och servern utan att användarens webbläsare (klient) ska behöva ladda om sidan.
-
-Din uppgift är nu att se till att eliminera alla sidomladdningar i din applikation. Om användaren med andra ord postar en kommentar, så ska denna kommentar postas utan att hela sidan laddas om. Ett anrop till servern, och ett hanterande av ett response måste alltså göras i bakgrunden med hjälp av \texttt{JavaScript}.
-
-\paragraph{}
-Om du utfört alla refaktoreringar i ovan övning kommer du märka att denna föflyttning till AJAX faktiskt inte är särskilt krånglig. Om du däremot har valt helt andra refaktoreringar kan det hända att detta visar sig svårare. Beroende på vilken fil-/mappstruktur du valt kan det som sagt hända att detta visar sig mycket svårt. Försök fundera på vad det är som gör detta svårt i ditt fall och hur du hade kunnat göra det bättre nästa gång. Refaktorera gärna mera innan du går vidare.
-
-\paragraph{}
-Den som vill kan även välja att endast låta postning och visning av kommentarer göras utan att ladda om någon sida. Med andra ord, låta login och registrering göras som vanligt. Men när användaren postar en kommentar så uppdateras sidan direkt utan att laddas om.
-
-Om du finner uppgiften svår, kan detta vara ett bra ställe att börja på.
 
 
 

@@ -17,7 +17,7 @@
 
   public static function authorize(){
     if(!isset($_SESSION['current_user'])){
-      Redirector::redirect('error.php');
+      Redirector::redirect('login.php');
     }
   }
 
