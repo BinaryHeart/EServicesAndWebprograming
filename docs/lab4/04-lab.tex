@@ -75,33 +75,47 @@ I denna laboration kommer vi att arbeta med att bygga om vår sida till en \href
 \pagebreak
 \section{Föreslagen struktur}
 Denna laboration består endast av 1 fas. Detta är en vidarutveckling av den applikation vi byggt i labb 1, 2 och 3. Denna laboration kräver ingen inlämning. Men för att få en uppfattning om hur ett färdigt projekt efter denna labb skulle kunna se ut -- beakta nedan filstruktur.
-\begin{itemize}
-  \item \texttt{labb3-fornamn-efternamn} (mapp)
+
   \begin{itemize}
-    \item \texttt{index.php}
-    \item \texttt{partials} (mapp)
-      \begin{itemize}
-        \item \texttt{login.php}
-        \item \texttt{register.php}
-        \item \texttt{posts-new.php}
-        \item \texttt{posts-list.php}
-      \end{itemize}
-    \item \texttt{include} (mapp)
-      \begin{itemize}
-        \item \texttt{db-connect.php}
-        \item \texttt{db-queries.php}
-        \item \texttt{process-register.php}
-        \item \texttt{process-login.php}
-        \item \texttt{process-post-comment.php}
-      \end{itemize}
-    \item \texttt{assets} (mapp)
+    \item lab4-fornamn-efternamn (mapp)
     \begin{itemize}
-      \item \texttt{img} (mapp med bilder)
-      \item \texttt{js } (mapp med javscriptfiler)
-      \item \texttt{css} (mapp med stylesheets)
+      \item \texttt{index.php}
+      \item \texttt{register.php}
+      \item \texttt{register-process.php}
+      \item \texttt{login.php}
+      \item \texttt{login-process.php}
+      \item \texttt{logout-process.php}
+      \item \texttt{posts.php}
+      \item \texttt{posts-create.php}
+      \item \texttt{include} (mapp som innehåller filer som inte bör navigeras till)
+      \begin{itemize}
+        \item \texttt{bootstrap.php} (Fil som include:ar alla klasser så att det räcker med att ladda in den här filen. Samt utför vitala aktiviteter såsom att t.ex. starta sessionen.
+        \item \texttt{views} (mapp som innehåller \texttt{html}-fokuserade filer)
+        \begin{itemize}
+          \item \texttt{\_header.php}
+          \item \texttt{\_footer.php}
+          \item \texttt{\_posts-list.php}
+          \item \texttt{\_posts-new.php}
+          \item \texttt{login.php}
+          \item \texttt{posts.php}
+          \item \texttt{register.php}
+        \end{itemize}
+        \item \texttt{models} (mapp som innehåller \texttt{klasser})
+        \begin{itemize}
+          \item \texttt{db.php}
+          \item \texttt{user.php}
+          \item \texttt{post.php}
+          \item \texttt{authorizer.php}
+        \end{itemize}
+      \end{itemize}
+      \item \texttt{assets} (mapp)
+      \begin{itemize}
+        \item \texttt{img} (mapp med bilder)
+        \item \texttt{js  } (mapp med javscriptfiler)
+        \item \texttt{css} (mapp med stylesheets)
+      \end{itemize}
     \end{itemize}
   \end{itemize}
-\end{itemize}
 
 Er faktiska filstruktur kan förstås markant variera beroende på vilken strategi ni väljer att lösa problemet med. Samt vilka refaktoreringar ni valt att uföra i föregående labb.
 
