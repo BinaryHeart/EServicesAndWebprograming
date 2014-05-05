@@ -131,6 +131,7 @@ Refaktorera din kod så att vi \textbf{åtminstone} uppfyller nedan.
   \item Om flera databas-query-metoder är liknande. Försök slå ihop dem.
   \item Separera ``printing'' och ``processing''. Låt \textbf{endast} de ``yttersta'' filerna hantera utskrivning av \texttt{html}. Låt inte ``process-filerna'' hantera \texttt{html}. Låt de istället hantera data-processning och business logic. Se förslagen inlämningsstruktur (högst upp) för ett förslag på denna indelning. I förslaget så har man valt att låta alla ``visuella'' filer bo i mappen \texttt{partials}. Sedan inkluderar \texttt{index.php} ``rätt fil'' beroende på vad som ska göras vid det givna tillfället. Vyerna (alltså mappen \texttt{partials}) samt \texttt{index.php} använder i sin tur filer ifrån \texttt{include} när komplexare operationer (såsom att skriva till databasen eller validera input) behöver utföras.
   \item Blanda \texttt{html} och \texttt{php} på ett tydligt och konsistent sätt. Du måste inte följa strukturen som är föreslagen i detta dokument. Men det är viktigt att du \textbf{har} en struktur.
+   \item Nu när vi fått ordning på struktur och förhoppningsvis fått det lättarbetat och öppen för förändring skall ni nu byta ut javascripten till att använda er av jQuery istället. 
 \end{itemize}
 
 
