@@ -8,8 +8,7 @@
 
       /* check connection */
       if ($this->mysqli->error) {
-        printf("Connect failed: %s\n", $this->mysqli->error);
-        exit();
+        Response::kill("Connect failed: %s\n", $this->mysqli->error);
       }
     }
 
@@ -20,12 +19,36 @@
     }
 
     public function insert_post($email, $message){
-      $args = array(
-        'message' => $message,
-        'email'   => $email
-      );
-      $sql = $this->_insert_query('posts', $args);
-      $this->_put($sql);
+      $user = $this->find_user_by_email($email);
+
+      if($user){
+        $args = array(
+          'userId'  => $user['id'],
+          'message' => $message
+        );
+
+        $sql = $this->_insert_query('posts', $args);
+        $this->_put($sql);
+      }else{
+        var_dump($email);
+        Response::kill('No user');
+      }
+    }
+
+    public function find_user_by_email($email){
+      $result = $this->_get($this->_select_query('users', "WHERE email='$email'"));
+      if(count($result))
+        return $result[0];
+      else
+        return false;
+    }
+
+    public function find_user($id){
+      $result = $this->_get($this->_select_query('users', "WHERE id='$id'"));
+      if(count($result))
+        return $result[0];
+      else
+        return false;
     }
 
     public function create_user($email, $password, $password_confirmation){
@@ -47,19 +70,15 @@
     }
 
     public function get_all_posts(){
-      return $this->_get($this->_select_query('posts'));
-    }
+      $result = array();
 
-    public function get_user($email){
-      $rows = $this->_get($this->_select_query('users', "WHERE email='$email'"));
-      foreach($rows as $row){
-        $result = $row;
-        break;
+      $posts = $this->_get($this->_select_query('posts'));
+      foreach($posts as $post){
+        $post['email'] = $this->find_user($post['userId'])['email'];
+        array_push($result, $post);
       }
-      if($result != null)
-        return $result;
-      else
-        return false;
+
+      return $result;
     }
 
 
@@ -76,8 +95,7 @@
 
     private function _get($query){
       $result = $this->_query($query);
-      mysqli_fetch_all($result, MYSQLI_ASSOC);
-      return $result;
+      return mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
 
     private function _query($sql){
@@ -96,6 +114,7 @@
     private function _insert_query($table, $associative){
       $columns = array();
       $values  = array();
+      
       foreach($associative as $col=>$val){
         $escaped_col = $this->mysqli->real_escape_string($col);
         $escaped_val = $this->mysqli->real_escape_string($val);

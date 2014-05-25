@@ -1,10 +1,10 @@
 <?
   require 'include/bootstrap.php';
 
-  $db = new Db();
+  $db = Db::get_instance();
 
   $db->insert_post(
-    $_POST['email'],
+    $_SESSION['current_user'],
     $_POST['message']
   );
 

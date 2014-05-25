@@ -7,8 +7,8 @@ $password = $_POST['password'];
 
 
 if(Authorizer::login($email, $password)){
-  Redirector::redirect('posts.php');
-
+  Redirector::redirect('posts.php', array(
+    'notices' => array('Successfully logged in!')));
 }else{
 
   Redirector::redirect('login.php', array(

@@ -1,6 +1,6 @@
 <? foreach($posts as $post): ?>
   <p>
-    <b><?= $post['title']; ?></b>:
+    <b><?= $post['email']; ?></b><br>
     <?= $post['message']; ?>
   </p>
 <? endforeach; ?>

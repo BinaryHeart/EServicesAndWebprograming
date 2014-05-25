@@ -5,10 +5,11 @@
   // models
   include 'db.php';
   include 'redirector.php';
+  include 'response.php';
   include 'authorizer.php';
   include 'user.php';
 
 
   // procedural
-  include 'errors.php';
+  include 'flashes.php';
 ?>
