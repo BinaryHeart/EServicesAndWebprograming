@@ -3,10 +3,14 @@
 
   $db = Db::get_instance();
 
-  $db->insert_post(
+  $post = $db->insert_post(
     $_SESSION['current_user'],
     $_POST['message']
   );
 
-  header('Location: posts.php');
+  if(Request::is_ajax())
+    require 'views/_post.php';
+  else{
+    header('Location: posts.php');
+  }
 ?>

@@ -6,6 +6,7 @@
   include 'db.php';
   include 'redirector.php';
   include 'response.php';
+  include 'request.php';
   include 'authorizer.php';
   include 'user.php';
 

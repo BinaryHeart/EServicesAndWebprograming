@@ -29,10 +29,18 @@
 
         $sql = $this->_insert_query('posts', $args);
         $this->_put($sql);
+        return $this->get_last_post();
       }else{
         var_dump($email);
         Response::kill('No user');
       }
+    }
+
+    public function get_last_post(){
+      $posts = $this->get_all_posts();
+      $post = end($posts);
+      $post['email'] = $this->find_user($post['userId'])['email'];
+      return $post;
     }
 
     public function find_user_by_email($email){
