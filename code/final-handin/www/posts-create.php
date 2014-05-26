@@ -1,12 +1,16 @@
 <?
   require 'include/bootstrap.php';
 
-  $db = new Db();
+  $db = Db::get_instance();
 
-  $db->insert_post(
-    $_POST['email'],
+  $post = $db->insert_post(
+    $_SESSION['current_user'],
     $_POST['message']
   );
 
-  header('Location: posts.php');
+  if(Request::is_ajax())
+    require 'views/_post.php';
+  else{
+    header('Location: posts.php');
+  }
 ?>

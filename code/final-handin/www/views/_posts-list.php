@@ -1,6 +1,5 @@
-<? foreach($posts as $post): ?>
-  <p>
-    <b><?= $post['title']; ?></b>:
-    <?= $post['message']; ?>
-  </p>
-<? endforeach; ?>
+<div id="posts">
+  <? foreach($posts as $post): ?>
+    <? require '_post.php'; ?>
+  <? endforeach; ?>
+</div>

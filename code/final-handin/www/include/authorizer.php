@@ -2,7 +2,7 @@
   public static function login($email, $password){
     $db = Db::get_instance();
 
-    $user = $db->get_user($email);
+    $user = $db->find_user_by_email($email);
     $expected = $user['password'];
 
     $given = self::hash($password, $user['salt']);
@@ -13,6 +13,11 @@
     }else{
       return false;
     }
+  }
+
+  public static function logout(){
+    session_destroy();
+    Redirector::redirect('index.php');
   }
 
   public static function authorize(){

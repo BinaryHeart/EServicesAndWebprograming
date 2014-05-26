@@ -15,7 +15,7 @@
    */
 
   if($status === true){
-    header('Location: index.php');
+    header('Location: login.php?notices=Registration successful!');
   }else{
     $email  = $_POST['email'];
     $errors = join('|', $status);
