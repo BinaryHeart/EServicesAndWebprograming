@@ -23,7 +23,7 @@ $ git merge --no-ff -m "Merging 'master' into 'gh-pages'" master
 # Jump back to master
 $ git checkout master
 
-# Push up all the changes and we're *drumroll* live!
+# Push up all the changes and *drumroll* we're live!
 $ git push --all
 ``` 
 
