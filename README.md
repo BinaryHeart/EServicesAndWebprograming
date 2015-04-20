@@ -5,7 +5,7 @@ The lab instructions for the course *e-services and web programming*.
 We develop on *master* and publish on *gh-pages*. To understand how publishing to *gh-pages* work [read more here](https://help.github.com/articles/creating-project-pages-manually/) .
 
 # Where is it published?
-[uu-im.github.io/EServicesAndWebprogramming/](http://uu-im.github.io/EServicesAndWebprogramming/)
+[uu-im.github.io/e-services/](http://uu-im.github.io/e-services/)
 
 # But how do we actually publish?
 If you're using bash (Mac or Linux) you can simply run the publish script placed in `bin/publish.sh`. If you're on Windows if would be fantastic if you could write up a little `.bat` file that runs the same commands. But anyways, these scripts are just convenience and ensure that we all publish in the same way. Essentially, publishing is simply done by merging the branch `master` into `gh-pages`. So essentially it goes something like this.
